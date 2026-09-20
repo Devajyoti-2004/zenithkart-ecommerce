@@ -1,0 +1,30 @@
+{
+  "name": "zenithkart-ecommerce",
+  "version": "1.0.0",
+  "description": "ZenithKart - Next-Generation Indian E-Commerce Platform with 1,000+ Products, Instant Search, UPI/COD Checkout, AI Assistant, and Order Tracking.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "express",
+    "nodejs",
+    "flipkart-clone",
+    "amazon-clone",
+    "upi-payment",
+    "cod-processing",
+    "ai-shopping-assistant",
+    "render-deploy"
+  ],
+  "author": "Devajyoti Ghosh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

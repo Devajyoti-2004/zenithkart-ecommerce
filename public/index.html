@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenithKart | India's Mega Online Store - 1,000+ Products</title>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-ticker">
+    <div class="ticker-content">
+      <span>🎉 <span class="highlight">MEGA FESTIVE SAVER DAYS:</span> Up to 70% OFF + Flat ₹200 off on UPI & Free COD Available! Use Code: <span class="highlight">FESTIVE10</span></span>
+    </div>
+    <div class="ticker-links">
+      <a href="#deals-section">🔥 Deal of the Day</a>
+      <a href="javascript:void(0)" onclick="openAIChat('Show me best discounts today')">✨ AI Deals Finder</a>
+      <a href="javascript:void(0)" onclick="openOrdersModal()">📦 Track Order</a>
+    </div>
+  </div>
+
+  <!-- 2. Sticky Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href="/" class="brand-logo" title="ZenithKart Home">
+        <img src="/images/logo.svg" alt="ZenithKart Logo">
+      </a>
+
+      <!-- Delivery Location -->
+      <div class="delivery-location" onclick="openAddressEdit()" title="Change delivery location">
+        <span style="font-size: 1.2rem;">📍</span>
+        <div>
+          <span style="font-size: 0.72rem; color: #94A3B8;">Deliver to</span>
+          <strong id="header-location">Bolpur 731204</strong>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <div class="search-box">
+          <select id="search-category" class="search-category-select">
+            <option value="all">All Categories</option>
+            <option value="mobiles">Mobiles & Tablets</option>
+            <option value="electronics">Electronics & Laptops</option>
+            <option value="fashion-men">Men's Fashion</option>
+            <option value="fashion-women">Women's Fashion</option>
+            <option value="home-kitchen">Home & Kitchen</option>
+            <option value="sports-fitness">Sports & Fitness</option>
+            <option value="beauty-grooming">Beauty & Grooming</option>
+            <option value="books-stationery">Books & Stationery</option>
+          </select>
+          <input type="text" id="search-input" class="search-input" placeholder="Search for 1,000+ products, brands, electronics, fashion..." autocomplete="off">
+          <button id="search-clear" class="search-clear-btn" title="Clear">✕</button>
+          <button id="search-btn" class="search-submit-btn" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+        </div>
+        <!-- Live Suggestions Box -->
+        <div id="search-suggestions" class="search-suggestions-dropdown"></div>
+      </div>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- AI Assistant Launch Button -->
+        <button class="nav-btn ai-launch-btn" onclick="toggleAIChat()" title="Ask Zenith AI Shopping Assistant">
+          <span>✨</span> Ask AI
+        </button>
+
+        <!-- Wishlist -->
+        <button class="nav-btn" onclick="openWishlistModal()" title="View Wishlist">
+          <span style="font-size: 1.15rem;">🤍</span>
+          <span class="badge-count" id="wishlist-count">0</span>
+        </button>
+
+        <!-- Cart -->
+        <button class="nav-btn cart-btn" onclick="toggleCartDrawer()" title="View Shopping Cart">
+          <span style="font-size: 1.15rem;">🛒</span>
+          <span>Cart</span>
+          <span class="badge-count" id="cart-count">0</span>
+        </button>
+
+        <!-- Account / Login -->
+        <button class="nav-btn" id="user-nav-btn" onclick="handleUserNavClick()">
+          <span style="font-size: 1.15rem;">👤</span>
+          <span id="user-nav-name">Sign In</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Horizontal Category Ribbon -->
+  <nav class="categories-nav">
+    <div class="categories-container" id="category-pills">
+      <div class="cat-pill active" data-cat="all">⚡ All Categories</div>
+      <div class="cat-pill" data-cat="mobiles">📱 Mobiles & Tablets</div>
+      <div class="cat-pill" data-cat="electronics">💻 Electronics & Laptops</div>
+      <div class="cat-pill" data-cat="fashion-men">👔 Men's Fashion</div>
+      <div class="cat-pill" data-cat="fashion-women">👗 Women's Fashion</div>
+      <div class="cat-pill" data-cat="home-kitchen">🏠 Home & Kitchen</div>
+      <div class="cat-pill" data-cat="sports-fitness">⚽ Sports & Fitness</div>
+      <div class="cat-pill" data-cat="beauty-grooming">💄 Beauty & Grooming</div>
+      <div class="cat-pill" data-cat="books-stationery">📚 Books & Stationery</div>
+      <div class="cat-pill" data-cat="deals" style="color: #FF5500; font-weight: 700;">🔥 Big Deals</div>
+    </div>
+  </nav>
+
+  <!-- 4. Hero Banner Carousel -->
+  <section class="hero-section">
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track">
+        <!-- Slide 1: Tech & Laptops -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80');">
+          <div class="slide-content">
+            <span class="slide-tag">⚡ Festive Mega Deal</span>
+            <h1 class="slide-title">Next-Gen Tech & Gaming Laptops</h1>
+            <p class="slide-desc">Save up to 45% on Dell, HP, Lenovo & Sony with No-Cost EMI & instant ₹2,000 off on SBI & HDFC cards.</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('electronics')">Explore Electronics ➔</button>
+          </div>
+        </div>
+        <!-- Slide 2: Smartphones 5G -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&auto=format&fit=crop&q=80');">
+          <div class="slide-content">
+            <span class="slide-tag">📱 5G Revolution</span>
+            <h1 class="slide-title">Flagship 5G Smartphones</h1>
+            <p class="slide-desc">Top-rated Samsung, Apple, OnePlus & Infinix devices. Flat ₹1,500 extra off with instant UPI payment!</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('mobiles')">Shop Mobiles ➔</button>
+          </div>
+        </div>
+        <!-- Slide 3: Fashion -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=80');">
+          <div class="slide-content">
+            <span class="slide-tag">👗 Festive Wardrobe</span>
+            <h1 class="slide-title">Trending Styles: 50% to 70% OFF</h1>
+            <p class="slide-desc">Bestselling ethnic wear, jeans, running sneakers & designer accessories from Nike, Puma, Levi's & GIVA.</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('fashion-men')">Upgrade Style ➔</button>
+          </div>
+        </div>
+        <!-- Slide 4: Home & Kitchen -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&auto=format&fit=crop&q=80');">
+          <div class="slide-content">
+            <span class="slide-tag">🏠 Smart Home</span>
+            <h1 class="slide-title">Healthy Cooking & Kitchen Appliances</h1>
+            <p class="slide-desc">Digital Air Fryers, Nutri-Blenders & Purifiers from Philips & Prestige. Free COD & 7-Day Replacement.</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('home-kitchen')">Shop Home & Kitchen ➔</button>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="carousel-prev" title="Previous Slide">‹</button>
+      <button class="carousel-btn carousel-next" id="carousel-next" title="Next Slide">›</button>
+      <div class="carousel-dots" id="carousel-dots">
+        <div class="carousel-dot active" data-index="0"></div>
+        <div class="carousel-dot" data-index="1"></div>
+        <div class="carousel-dot" data-index="2"></div>
+        <div class="carousel-dot" data-index="3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Flash Sale & Countdown Ribbon -->
+  <section class="flash-deals-ribbon" id="deals-section">
+    <div class="deals-bar">
+      <div class="deals-info">
+        <span style="font-size: 1.6rem;">⚡</span>
+        <div>
+          <div class="deals-title">Deal of the Day & Lightning Offers</div>
+          <p style="font-size: 0.85rem; color: #BFDBFE;">Massive price drops across top brands • Verified Genuine • Cash on Delivery available</p>
+        </div>
+      </div>
+      <div class="timer-container">
+        <span>ENDS IN:</span>
+        <span class="timer-box" id="timer-hours">05</span>:
+        <span class="timer-box" id="timer-mins">34</span>:
+        <span class="timer-box" id="timer-secs">48</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Main Store Layout: Filters Sidebar + Catalog Grid -->
+  <main class="main-layout">
+    <!-- Left Filter Sidebar -->
+    <aside class="filters-sidebar" id="filters-sidebar">
+      <div class="filter-header">
+        <h3>Filters</h3>
+        <button class="filter-clear-btn" id="filter-clear-all" onclick="resetAllFilters()">Clear All</button>
+      </div>
+
+      <!-- Deals Only Toggle -->
+      <div class="filter-group">
+        <label class="filter-checkbox-label" style="font-weight: 700; color: #FF5500;">
+          <input type="checkbox" id="filter-deals-only">
+          <span>🔥 Flash Deals & Discounts (40%+)</span>
+        </label>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-group">
+        <div class="filter-title">Categories</div>
+        <div class="filter-options-list" id="category-filter-list">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Price Range Filter -->
+      <div class="filter-group">
+        <div class="filter-title">Price Range (₹)</div>
+        <div class="price-range-inputs">
+          <input type="number" id="filter-min-price" class="price-input-box" placeholder="Min (₹)" min="0">
+          <span>to</span>
+          <input type="number" id="filter-max-price" class="price-input-box" placeholder="Max (₹)" min="0">
+        </div>
+        <button class="btn-card-cart" style="width: 100%; margin-top: 8px;" onclick="applyFilters()">Apply Price</button>
+      </div>
+
+      <!-- Brand Filter -->
+      <div class="filter-group">
+        <div class="filter-title">Top Brands</div>
+        <div class="filter-options-list" id="brand-filter-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Customer Rating Filter -->
+      <div class="filter-group">
+        <div class="filter-title">Customer Ratings</div>
+        <div class="filter-options-list">
+          <label class="filter-checkbox-label">
+            <input type="radio" name="rating-filter" value="4.5">
+            <span>4.5★ & above</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="radio" name="rating-filter" value="4.0">
+            <span>4.0★ & above</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="radio" name="rating-filter" value="3.5">
+            <span>3.5★ & above</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Discount Percentage Filter -->
+      <div class="filter-group">
+        <div class="filter-title">Discount</div>
+        <div class="filter-options-list">
+          <label class="filter-checkbox-label">
+            <input type="radio" name="discount-filter" value="50">
+            <span>50% or more</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="radio" name="discount-filter" value="40">
+            <span>40% or more</span>
+          </label>
+          <label class="filter-checkbox-label">
+            <input type="radio" name="discount-filter" value="30">
+            <span>30% or more</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Catalog Area -->
+    <section class="catalog-container">
+      <!-- Catalog Controls Header -->
+      <div class="catalog-header">
+        <div class="catalog-stats">
+          <span id="catalog-count-text">Showing <strong>1 - 24</strong> of <strong>1,080</strong> products</span>
+        </div>
+        <div class="catalog-sort">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select" class="sort-select" onchange="applyFilters()">
+            <option value="featured">Featured / Popular</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="discount_desc">Biggest Discount</option>
+            <option value="rating_desc">Highest Customer Rating</option>
+            <option value="reviews_desc">Most Reviewed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active Filter Chips -->
+      <div class="active-filters-chips" id="active-filter-chips"></div>
+
+      <!-- Product Cards Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-wrapper" id="pagination-controls">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 7. Slide-Over Shopping Cart Drawer -->
+  <div class="drawer-backdrop" id="cart-backdrop" onclick="toggleCartDrawer()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>🛒</span>
+        <span>My Shopping Cart (<span id="cart-drawer-count">0</span> items)</span>
+      </div>
+      <button class="drawer-close-btn" onclick="toggleCartDrawer()">✕</button>
+    </div>
+
+    <!-- Items List Body -->
+    <div class="cart-items-body" id="cart-items-container">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- Footer Summary & Checkout -->
+    <div class="cart-drawer-footer" id="cart-drawer-footer">
+      <!-- Coupon Box -->
+      <div class="coupon-box">
+        <input type="text" id="coupon-input" class="coupon-input" placeholder="Enter coupon (e.g. FESTIVE10)">
+        <button class="coupon-apply-btn" onclick="applyCoupon()">Apply</button>
+      </div>
+      <div id="coupon-msg" style="font-size: 0.78rem; margin-top: -8px; margin-bottom: 8px;"></div>
+
+      <div class="savings-banner" id="savings-banner">
+        🎉 Total Savings on this order: <strong id="total-savings-text">₹0</strong>
+      </div>
+
+      <!-- Price Table -->
+      <table class="price-summary-table">
+        <tr>
+          <td>Total MRP</td>
+          <td align="right" id="summary-mrp">₹0</td>
+        </tr>
+        <tr>
+          <td>Product Discount</td>
+          <td align="right" style="color: var(--success);" id="summary-discount">- ₹0</td>
+        </tr>
+        <tr id="row-coupon" style="display: none;">
+          <td>Coupon Savings</td>
+          <td align="right" style="color: var(--success);" id="summary-coupon">- ₹0</td>
+        </tr>
+        <tr>
+          <td>Delivery Fee</td>
+          <td align="right" style="color: var(--success);">FREE</td>
+        </tr>
+        <tr class="total-row">
+          <td>Grand Total</td>
+          <td align="right" id="summary-grand-total">₹0</td>
+        </tr>
+      </table>
+
+      <button class="btn-checkout" onclick="proceedToCheckout()">Proceed to Buy ➔</button>
+    </div>
+  </aside>
+
+  <!-- 8. Product Details Modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+      <div class="product-detail-layout" id="product-detail-content">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Checkout & Indian Payment Gateway Modal (UPI, COD, Card) -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-content checkout-modal-content">
+      <button class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
+      
+      <div class="checkout-step-title">
+        <span>📍</span> Step 1: Confirm Delivery Address
+      </div>
+      <div class="form-grid">
+        <div>
+          <label class="form-label">Full Name *</label>
+          <input type="text" id="ship-name" class="form-input" value="Devajyoti Ghosh">
+        </div>
+        <div>
+          <label class="form-label">10-Digit Mobile Phone *</label>
+          <input type="tel" id="ship-phone" class="form-input" value="+91 98325 71508">
+        </div>
+        <div class="form-group-full">
+          <label class="form-label">Street Address & Landmark *</label>
+          <input type="text" id="ship-address" class="form-input" value="Ward 12, Bolpur Municipality">
+        </div>
+        <div>
+          <label class="form-label">City / Town *</label>
+          <input type="text" id="ship-city" class="form-input" value="Bolpur, Birbhum">
+        </div>
+        <div>
+          <label class="form-label">Pincode *</label>
+          <input type="text" id="ship-pincode" class="form-input" value="731204">
+        </div>
+      </div>
+
+      <div class="checkout-step-title">
+        <span>💳</span> Step 2: Select Payment Method
+      </div>
+
+      <!-- Payment Method Tabs -->
+      <div class="payment-tabs">
+        <button class="payment-tab-btn active" data-method="UPI" onclick="switchPaymentTab('UPI')">
+          <span>⚡</span> UPI (GPay / PhonePe / Paytm)
+        </button>
+        <button class="payment-tab-btn" data-method="COD" onclick="switchPaymentTab('COD')">
+          <span>💵</span> Cash on Delivery (COD)
+        </button>
+        <button class="payment-tab-btn" data-method="CARD" onclick="switchPaymentTab('CARD')">
+          <span>💳</span> Credit / Debit Card
+        </button>
+      </div>
+
+      <!-- Tab Panel: UPI -->
+      <div class="payment-tab-panel active" id="panel-UPI">
+        <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">Select UPI App for Instant Verification:</p>
+        <div class="upi-apps-row">
+          <div class="upi-app-badge selected" onclick="selectUPIApp(this, 'Google Pay')">Google Pay</div>
+          <div class="upi-app-badge" onclick="selectUPIApp(this, 'PhonePe')">PhonePe</div>
+          <div class="upi-app-badge" onclick="selectUPIApp(this, 'Paytm')">Paytm</div>
+          <div class="upi-app-badge" onclick="selectUPIApp(this, 'BHIM')">BHIM UPI</div>
+        </div>
+        <label class="form-label">Or Enter Virtual Payment Address (UPI ID)</label>
+        <input type="text" id="upi-vpa-input" class="form-input" placeholder="e.g. 9832571508@axl or yourname@okhdfcbank" value="devajyoti@okhdfcbank">
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">⚡ Extra 5% instant discount is automatically applied on UPI orders!</p>
+      </div>
+
+      <!-- Tab Panel: COD -->
+      <div class="payment-tab-panel" id="panel-COD">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span style="font-size: 2rem;">📦</span>
+          <div>
+            <strong style="font-size: 0.95rem;">Pay via Cash or QR at Doorstep</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Pay securely by cash or UPI QR code when our delivery courier arrives at your location.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Panel: CARD -->
+      <div class="payment-tab-panel" id="panel-CARD">
+        <div class="form-grid" style="margin-bottom: 0;">
+          <div class="form-group-full">
+            <label class="form-label">Card Number</label>
+            <input type="text" id="card-num" class="form-input" placeholder="4532 •••• •••• 9262" maxlength="19">
+          </div>
+          <div>
+            <label class="form-label">Valid Thru (MM/YY)</label>
+            <input type="text" id="card-exp" class="form-input" placeholder="08/29" maxlength="5">
+          </div>
+          <div>
+            <label class="form-label">CVV (3 digits)</label>
+            <input type="password" id="card-cvv" class="form-input" placeholder="•••" maxlength="3">
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Total Review -->
+      <div style="background: #FFF; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <span style="font-weight: 700; font-size: 0.95rem;">Final Payable Amount:</span>
+        <strong style="font-size: 1.3rem; color: var(--primary);" id="checkout-payable-total">₹0</strong>
+      </div>
+
+      <button class="btn-checkout" onclick="executePlaceOrder()" id="btn-place-order">
+        Confirm & Place Order ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- 10. Order Success & Tracking Modal -->
+  <div class="modal-overlay" id="order-success-modal">
+    <div class="modal-content" style="max-width: 580px; text-align: center; padding: 40px 30px;">
+      <button class="modal-close-btn" onclick="closeOrderSuccessModal()">✕</button>
+      <div style="font-size: 3.5rem; margin-bottom: 10px;">🎉</div>
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Order Placed Successfully!</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Thank you for shopping at ZenithKart. We have sent a confirmation message & invoice to your registered contact.
+      </p>
+
+      <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 24px; text-align: left;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Order Identifier:</span>
+          <strong style="color: var(--primary); font-family: monospace; font-size: 0.95rem;" id="success-order-id">ZK-849201-9241</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Estimated Delivery:</span>
+          <strong id="success-delivery-date">Wednesday, 23 Sep 2026</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Payment Mode:</span>
+          <strong id="success-payment-method">UPI (Verified)</strong>
+        </div>
+      </div>
+
+      <!-- Tracking Stepper -->
+      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; padding: 0 10px;">
+        <div style="text-align: center;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--success); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">✓</div>
+          <span style="font-size: 0.75rem; font-weight: 700;">Confirmed</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">📦</div>
+          <span style="font-size: 0.75rem; font-weight: 700;">Packed</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">🚚</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Shipped</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">🏠</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Delivered</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <button class="btn-card-cart" onclick="closeOrderSuccessModal(); openOrdersModal();">View Past Orders</button>
+        <button class="btn-card-buy" onclick="closeOrderSuccessModal()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. User Auth & Profile Modal -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-content" style="max-width: 440px; padding: 24px;">
+      <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
+      
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Sign In</div>
+        <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Create Account</div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="form-login" onsubmit="handleLoginSubmit(event)" style="margin-top: 20px;">
+        <div style="margin-bottom: 14px;">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="demo@zenithkart.com" required>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-checkout" style="width: 100%; margin-bottom: 12px;">Sign In</button>
+        <button type="button" class="btn-card-cart" style="width: 100%;" onclick="quickDemoLogin()">⚡ Quick One-Click Demo Login</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="form-register" onsubmit="handleRegisterSubmit(event)" style="margin-top: 20px; display: none;">
+        <div style="margin-bottom: 12px;">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Devajyoti Ghosh" required>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="e.g. user@example.com" required>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label class="form-label">Mobile Number</label>
+          <input type="tel" id="reg-phone" class="form-input" placeholder="+91 98765 43210">
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="Minimum 6 characters" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-checkout" style="width: 100%;">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 12. My Orders Modal -->
+  <div class="modal-overlay" id="orders-modal">
+    <div class="modal-content" style="max-width: 720px; padding: 24px;">
+      <button class="modal-close-btn" onclick="closeOrdersModal()">✕</button>
+      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 16px;">📦 My Orders & Tracking</h3>
+      <div id="user-orders-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. AI Shopping Assistant Widget -->
+  <div class="ai-chat-bubble" onclick="toggleAIChat()" title="Chat with Zenith AI Assistant">
+    ✨
+  </div>
+
+  <div class="ai-chat-window" id="ai-chat-window">
+    <div class="ai-chat-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.3rem;">🤖</span>
+        <div>
+          <strong style="font-size: 0.95rem;">Zenith AI Assistant</strong>
+          <span style="display: block; font-size: 0.72rem; color: #E0E7FF;">Finds products, deals & tracks orders</span>
+        </div>
+      </div>
+      <button style="background: none; border: none; color: #FFF; font-size: 1.2rem; cursor: pointer;" onclick="toggleAIChat()">✕</button>
+    </div>
+
+    <!-- Suggested Quick Chips -->
+    <div style="padding: 10px 14px; background: #EEF2FF; border-bottom: 1px solid #E0E7FF; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap;">
+      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Laptops under 70k for coding')">💻 Laptops under 70k</span>
+      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Best 5G phones with offers')">📱 5G Smartphones</span>
+      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Show biggest discounts today')">🔥 50%+ Discounts</span>
+      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Gift ideas under 2000')">🎁 Gifts under 2k</span>
+    </div>
+
+    <div class="ai-chat-messages" id="ai-chat-messages">
+      <div class="ai-msg bot">
+        👋 Hi! I'm your Zenith AI shopping assistant. Ask me anything like <em>"suggest gaming laptop under 80000"</em>, <em>"find boAt headphones"</em>, or track your orders!
+      </div>
+    </div>
+
+    <div class="ai-chat-input-row">
+      <input type="text" id="ai-user-input" class="form-input" style="padding: 8px 12px; font-size: 0.88rem;" placeholder="Ask Zenith AI for deals, specs, or suggestions..." onkeydown="if(event.key==='Enter') executeAIChat()">
+      <button class="btn-card-cart" style="padding: 8px 14px;" onclick="executeAIChat()">Send</button>
+    </div>
+  </div>
+
+  <!-- 14. Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- 15. Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>About ZenithKart</h4>
+        <ul>
+          <li><a href="javascript:void(0)">About Us & Story</a></li>
+          <li><a href="javascript:void(0)">Careers & Engineering</a></li>
+          <li><a href="javascript:void(0)">Press Releases</a></li>
+          <li><a href="javascript:void(0)">Zenith Wholesale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openOrdersModal()">Track My Orders</a></li>
+          <li><a href="javascript:void(0)">Shipping Rates & Policies</a></li>
+          <li><a href="javascript:void(0)">7-Day Returns & Replacement</a></li>
+          <li><a href="javascript:void(0)">Help Center & 24x7 Chat</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Consumer Policy</h4>
+        <ul>
+          <li><a href="javascript:void(0)">Terms of Use</a></li>
+          <li><a href="javascript:void(0)">Privacy Policy</a></li>
+          <li><a href="javascript:void(0)">Security Standards</a></li>
+          <li><a href="javascript:void(0)">EPR Compliance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Secure Payments</h4>
+        <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">We accept all major payment networks in India:</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.8rem; font-weight: 700; color: #FFF;">
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">⚡ UPI (GPay/PhonePe)</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💵 Cash on Delivery</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💳 RuPay / Visa / Master</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">🏦 Net Banking</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 ZenithKart Inc. All rights reserved. Crafted with precision for high-performance e-commerce.</div>
+      <div>Designed & Developed by <strong>Devajyoti Ghosh</strong></div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

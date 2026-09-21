@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#2874F0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>ZenithKart | India's Mega Online Store - 1,000+ Products</title>
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 
-  <!-- 1. Top Announcement Bar -->
+  <!-- 1. Top Announcement Bar (Desktop) -->
   <div class="top-ticker">
     <div class="ticker-content">
       <span>🎉 <span class="highlight">MEGA FESTIVE SAVER DAYS:</span> Up to 70% OFF + Flat ₹200 off on UPI & Free COD Available! Use Code: <span class="highlight">FESTIVE10</span></span>
@@ -29,7 +34,7 @@
         <img src="/images/logo.svg" alt="ZenithKart Logo">
       </a>
 
-      <!-- Delivery Location -->
+      <!-- Delivery Location (Desktop) -->
       <div class="delivery-location" onclick="openAddressEdit()" title="Change delivery location">
         <span style="font-size: 1.2rem;">📍</span>
         <div>
@@ -52,7 +57,7 @@
             <option value="beauty-grooming">Beauty & Grooming</option>
             <option value="books-stationery">Books & Stationery</option>
           </select>
-          <input type="text" id="search-input" class="search-input" placeholder="Search for 1,000+ products, brands, electronics, fashion..." autocomplete="off">
+          <input type="text" id="search-input" class="search-input" placeholder="Search 1,000+ products, brands, deals..." autocomplete="off">
           <button id="search-clear" class="search-clear-btn" title="Clear">✕</button>
           <button id="search-btn" class="search-submit-btn" title="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -62,7 +67,7 @@
         <div id="search-suggestions" class="search-suggestions-dropdown"></div>
       </div>
 
-      <!-- Nav Actions -->
+      <!-- Nav Actions (Desktop) -->
       <div class="nav-actions">
         <!-- AI Assistant Launch Button -->
         <button class="nav-btn ai-launch-btn" onclick="toggleAIChat()" title="Ask Zenith AI Shopping Assistant">
@@ -94,29 +99,29 @@
   <!-- 3. Horizontal Category Ribbon -->
   <nav class="categories-nav">
     <div class="categories-container" id="category-pills">
-      <div class="cat-pill active" data-cat="all">⚡ All Categories</div>
-      <div class="cat-pill" data-cat="mobiles">📱 Mobiles & Tablets</div>
-      <div class="cat-pill" data-cat="electronics">💻 Electronics & Laptops</div>
-      <div class="cat-pill" data-cat="fashion-men">👔 Men's Fashion</div>
-      <div class="cat-pill" data-cat="fashion-women">👗 Women's Fashion</div>
-      <div class="cat-pill" data-cat="home-kitchen">🏠 Home & Kitchen</div>
-      <div class="cat-pill" data-cat="sports-fitness">⚽ Sports & Fitness</div>
-      <div class="cat-pill" data-cat="beauty-grooming">💄 Beauty & Grooming</div>
-      <div class="cat-pill" data-cat="books-stationery">📚 Books & Stationery</div>
-      <div class="cat-pill" data-cat="deals" style="color: #FF5500; font-weight: 700;">🔥 Big Deals</div>
+      <div class="cat-pill active" data-cat="all">⚡ All</div>
+      <div class="cat-pill" data-cat="mobiles">📱 Mobiles</div>
+      <div class="cat-pill" data-cat="electronics">💻 Electronics</div>
+      <div class="cat-pill" data-cat="fashion-men">👔 Men</div>
+      <div class="cat-pill" data-cat="fashion-women">👗 Women</div>
+      <div class="cat-pill" data-cat="home-kitchen">🏠 Kitchen</div>
+      <div class="cat-pill" data-cat="sports-fitness">⚽ Sports</div>
+      <div class="cat-pill" data-cat="beauty-grooming">💄 Beauty</div>
+      <div class="cat-pill" data-cat="books-stationery">📚 Books</div>
+      <div class="cat-pill" data-cat="deals" style="color: #FF5500; font-weight: 700;">🔥 Deals</div>
     </div>
   </nav>
 
-  <!-- 4. Hero Banner Carousel -->
+  <!-- 4. Hero Banner Carousel with Touch Swiping -->
   <section class="hero-section">
-    <div class="carousel-container">
+    <div class="carousel-container" id="carousel-container">
       <div class="carousel-track" id="carousel-track">
         <!-- Slide 1: Tech & Laptops -->
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">⚡ Festive Mega Deal</span>
-            <h1 class="slide-title">Next-Gen Tech & Gaming Laptops</h1>
-            <p class="slide-desc">Save up to 45% on Dell, HP, Lenovo & Sony with No-Cost EMI & instant ₹2,000 off on SBI & HDFC cards.</p>
+            <h1 class="slide-title">Next-Gen Tech & Laptops</h1>
+            <p class="slide-desc">Save up to 45% on Dell, HP, Lenovo & Sony with No-Cost EMI & instant ₹2,000 off on cards.</p>
             <button class="slide-btn" onclick="applyCategoryFilter('electronics')">Explore Electronics ➔</button>
           </div>
         </div>
@@ -125,7 +130,7 @@
           <div class="slide-content">
             <span class="slide-tag">📱 5G Revolution</span>
             <h1 class="slide-title">Flagship 5G Smartphones</h1>
-            <p class="slide-desc">Top-rated Samsung, Apple, OnePlus & Infinix devices. Flat ₹1,500 extra off with instant UPI payment!</p>
+            <p class="slide-desc">Top-rated Samsung, Apple, OnePlus & Infinix devices. Flat ₹1,500 extra off with UPI!</p>
             <button class="slide-btn" onclick="applyCategoryFilter('mobiles')">Shop Mobiles ➔</button>
           </div>
         </div>
@@ -133,8 +138,8 @@
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">👗 Festive Wardrobe</span>
-            <h1 class="slide-title">Trending Styles: 50% to 70% OFF</h1>
-            <p class="slide-desc">Bestselling ethnic wear, jeans, running sneakers & designer accessories from Nike, Puma, Levi's & GIVA.</p>
+            <h1 class="slide-title">Trending Styles: 50% - 70% OFF</h1>
+            <p class="slide-desc">Bestselling ethnic wear, jeans, running sneakers & designer accessories from Nike & Puma.</p>
             <button class="slide-btn" onclick="applyCategoryFilter('fashion-men')">Upgrade Style ➔</button>
           </div>
         </div>
@@ -142,9 +147,9 @@
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">🏠 Smart Home</span>
-            <h1 class="slide-title">Healthy Cooking & Kitchen Appliances</h1>
-            <p class="slide-desc">Digital Air Fryers, Nutri-Blenders & Purifiers from Philips & Prestige. Free COD & 7-Day Replacement.</p>
-            <button class="slide-btn" onclick="applyCategoryFilter('home-kitchen')">Shop Home & Kitchen ➔</button>
+            <h1 class="slide-title">Kitchen & Home Appliances</h1>
+            <p class="slide-desc">Digital Air Fryers, Nutri-Blenders & Purifiers from Philips & Prestige. Free COD.</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('home-kitchen')">Shop Home ➔</button>
           </div>
         </div>
       </div>
@@ -163,10 +168,10 @@
   <section class="flash-deals-ribbon" id="deals-section">
     <div class="deals-bar">
       <div class="deals-info">
-        <span style="font-size: 1.6rem;">⚡</span>
+        <span style="font-size: 1.5rem;">⚡</span>
         <div>
-          <div class="deals-title">Deal of the Day & Lightning Offers</div>
-          <p style="font-size: 0.85rem; color: #BFDBFE;">Massive price drops across top brands • Verified Genuine • Cash on Delivery available</p>
+          <div class="deals-title">Deal of the Day & Offers</div>
+          <p style="font-size: 0.85rem; color: #BFDBFE;">Massive price drops across top brands • Cash on Delivery available</p>
         </div>
       </div>
       <div class="timer-container">
@@ -178,13 +183,32 @@
     </div>
   </section>
 
-  <!-- 6. Main Store Layout: Filters Sidebar + Catalog Grid -->
+  <!-- 6. Sticky Mobile Filter & Sort Toolbar (Mobile only) -->
+  <div class="mobile-filter-bar">
+    <button class="mobile-filter-btn" id="mob-sort-btn" onclick="openMobileSortSheet()">
+      <span>⇅</span> Sort
+    </button>
+    <button class="mobile-filter-btn" id="mob-deals-btn" onclick="toggleMobileDeals()">
+      <span>🔥</span> Deals (40%+)
+    </button>
+    <button class="mobile-filter-btn" id="mob-filter-btn" onclick="toggleMobileFilterSheet(true)">
+      <span>⚙️</span> Filters <span class="badge-count" id="mobile-filter-badge" style="display: none; position: static; margin-left: 4px;">0</span>
+    </button>
+  </div>
+
+  <!-- Mobile Filter Backdrop -->
+  <div class="drawer-backdrop" id="filter-sheet-backdrop" onclick="toggleMobileFilterSheet(false)"></div>
+
+  <!-- 7. Main Store Layout: Filters Sidebar + Catalog Grid -->
   <main class="main-layout">
-    <!-- Left Filter Sidebar -->
+    <!-- Left Filter Sidebar / Mobile Slide-Up Sheet -->
     <aside class="filters-sidebar" id="filters-sidebar">
       <div class="filter-header">
-        <h3>Filters</h3>
-        <button class="filter-clear-btn" id="filter-clear-all" onclick="resetAllFilters()">Clear All</button>
+        <h3>Filter Catalog</h3>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="filter-clear-btn" id="filter-clear-all" onclick="resetAllFilters()">Clear All</button>
+          <button class="drawer-close-btn" style="display: none;" id="filter-sheet-close" onclick="toggleMobileFilterSheet(false)">✕</button>
+        </div>
       </div>
 
       <!-- Deals Only Toggle -->
@@ -211,7 +235,7 @@
           <span>to</span>
           <input type="number" id="filter-max-price" class="price-input-box" placeholder="Max (₹)" min="0">
         </div>
-        <button class="btn-card-cart" style="width: 100%; margin-top: 8px;" onclick="applyFilters()">Apply Price</button>
+        <button class="btn-card-cart" style="width: 100%; margin-top: 8px;" onclick="applyFilters(); toggleMobileFilterSheet(false);">Apply Price</button>
       </div>
 
       <!-- Brand Filter -->
@@ -259,11 +283,17 @@
           </label>
         </div>
       </div>
+
+      <div style="margin-top: 16px;">
+        <button class="slide-btn" style="width: 100%; padding: 12px;" onclick="applyFilters(); toggleMobileFilterSheet(false);">
+          Show Results
+        </button>
+      </div>
     </aside>
 
     <!-- Right Catalog Area -->
     <section class="catalog-container">
-      <!-- Catalog Controls Header -->
+      <!-- Catalog Controls Header (Desktop) -->
       <div class="catalog-header">
         <div class="catalog-stats">
           <span id="catalog-count-text">Showing <strong>1 - 24</strong> of <strong>1,080</strong> products</span>
@@ -284,7 +314,7 @@
       <!-- Active Filter Chips -->
       <div class="active-filters-chips" id="active-filter-chips"></div>
 
-      <!-- Product Cards Grid -->
+      <!-- Product Cards Grid (2 Columns on Mobile, responsive up to 5 on wide screens) -->
       <div class="products-grid" id="products-grid">
         <!-- Rendered dynamically -->
       </div>
@@ -296,13 +326,69 @@
     </section>
   </main>
 
-  <!-- 7. Slide-Over Shopping Cart Drawer -->
+  <!-- 8. Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-item active" id="mob-nav-home" onclick="handleMobileNav('home')">
+      <span class="mobile-nav-icon">🏠</span>
+      <span class="mobile-nav-label">Home</span>
+    </button>
+    <button class="mobile-nav-item" id="mob-nav-cat" onclick="handleMobileNav('categories')">
+      <span class="mobile-nav-icon">🗂️</span>
+      <span class="mobile-nav-label">Categories</span>
+    </button>
+    <button class="mobile-nav-item" id="mob-nav-deals" onclick="handleMobileNav('deals')">
+      <span class="mobile-nav-icon">⚡</span>
+      <span class="mobile-nav-label">Deals</span>
+    </button>
+    <button class="mobile-nav-item" id="mob-nav-cart" onclick="handleMobileNav('cart')">
+      <span class="mobile-nav-icon">
+        🛒
+        <span class="badge-count" id="mob-cart-badge">0</span>
+      </span>
+      <span class="mobile-nav-label">Cart</span>
+    </button>
+    <button class="mobile-nav-item" id="mob-nav-account" onclick="handleMobileNav('account')">
+      <span class="mobile-nav-icon">👤</span>
+      <span class="mobile-nav-label" id="mob-account-label">Account</span>
+    </button>
+  </nav>
+
+  <!-- 9. Mobile Sort Sheet -->
+  <div class="drawer-backdrop" id="sort-backdrop" onclick="closeMobileSortSheet()"></div>
+  <div class="mobile-bottom-sheet" id="sort-sheet">
+    <div class="sheet-header">
+      <span>⇅ Sort Products</span>
+      <button class="drawer-close-btn" onclick="closeMobileSortSheet()">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="sort-option selected" data-sort="featured" onclick="selectMobileSort('featured')">Featured / Popular</div>
+      <div class="sort-option" data-sort="price_asc" onclick="selectMobileSort('price_asc')">Price: Low to High</div>
+      <div class="sort-option" data-sort="price_desc" onclick="selectMobileSort('price_desc')">Price: High to Low</div>
+      <div class="sort-option" data-sort="discount_desc" onclick="selectMobileSort('discount_desc')">Biggest Discount (%)</div>
+      <div class="sort-option" data-sort="rating_desc" onclick="selectMobileSort('rating_desc')">Highest Customer Rating</div>
+      <div class="sort-option" data-sort="reviews_desc" onclick="selectMobileSort('reviews_desc')">Most Reviewed</div>
+    </div>
+  </div>
+
+  <!-- 10. Mobile Categories Sheet -->
+  <div class="drawer-backdrop" id="categories-backdrop" onclick="closeMobileCategoriesSheet()"></div>
+  <div class="mobile-bottom-sheet" id="categories-sheet">
+    <div class="sheet-header">
+      <span>🗂️ Explore All Categories</span>
+      <button class="drawer-close-btn" onclick="closeMobileCategoriesSheet()">✕</button>
+    </div>
+    <div class="sheet-body" id="mobile-categories-list">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- 11. Slide-Over Shopping Cart Drawer -->
   <div class="drawer-backdrop" id="cart-backdrop" onclick="toggleCartDrawer()"></div>
   <aside class="cart-drawer" id="cart-drawer">
     <div class="drawer-header">
       <div class="drawer-title">
         <span>🛒</span>
-        <span>My Shopping Cart (<span id="cart-drawer-count">0</span> items)</span>
+        <span>My Cart (<span id="cart-drawer-count">0</span> items)</span>
       </div>
       <button class="drawer-close-btn" onclick="toggleCartDrawer()">✕</button>
     </div>
@@ -316,7 +402,7 @@
     <div class="cart-drawer-footer" id="cart-drawer-footer">
       <!-- Coupon Box -->
       <div class="coupon-box">
-        <input type="text" id="coupon-input" class="coupon-input" placeholder="Enter coupon (e.g. FESTIVE10)">
+        <input type="text" id="coupon-input" class="coupon-input" placeholder="Coupon (e.g. FESTIVE10)">
         <button class="coupon-apply-btn" onclick="applyCoupon()">Apply</button>
       </div>
       <div id="coupon-msg" style="font-size: 0.78rem; margin-top: -8px; margin-bottom: 8px;"></div>
@@ -353,7 +439,7 @@
     </div>
   </aside>
 
-  <!-- 8. Product Details Modal -->
+  <!-- 12. Product Details Modal with Sticky Mobile Bottom Bar -->
   <div class="modal-overlay" id="product-modal">
     <div class="modal-content">
       <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
@@ -363,13 +449,13 @@
     </div>
   </div>
 
-  <!-- 9. Checkout & Indian Payment Gateway Modal (UPI, COD, Card) -->
+  <!-- 13. Checkout & Indian Payment Gateway Modal (UPI, COD, Card) -->
   <div class="modal-overlay" id="checkout-modal">
     <div class="modal-content checkout-modal-content">
       <button class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
       
       <div class="checkout-step-title">
-        <span>📍</span> Step 1: Confirm Delivery Address
+        <span>📍</span> Step 1: Delivery Address
       </div>
       <div class="form-grid">
         <div>
@@ -377,11 +463,11 @@
           <input type="text" id="ship-name" class="form-input" value="Devajyoti Ghosh">
         </div>
         <div>
-          <label class="form-label">10-Digit Mobile Phone *</label>
+          <label class="form-label">10-Digit Mobile *</label>
           <input type="tel" id="ship-phone" class="form-input" value="+91 98325 71508">
         </div>
         <div class="form-group-full">
-          <label class="form-label">Street Address & Landmark *</label>
+          <label class="form-label">Street Address *</label>
           <input type="text" id="ship-address" class="form-input" value="Ward 12, Bolpur Municipality">
         </div>
         <div>
@@ -395,19 +481,19 @@
       </div>
 
       <div class="checkout-step-title">
-        <span>💳</span> Step 2: Select Payment Method
+        <span>💳</span> Step 2: Payment Method
       </div>
 
       <!-- Payment Method Tabs -->
       <div class="payment-tabs">
         <button class="payment-tab-btn active" data-method="UPI" onclick="switchPaymentTab('UPI')">
-          <span>⚡</span> UPI (GPay / PhonePe / Paytm)
+          <span>⚡</span> UPI
         </button>
         <button class="payment-tab-btn" data-method="COD" onclick="switchPaymentTab('COD')">
-          <span>💵</span> Cash on Delivery (COD)
+          <span>💵</span> COD
         </button>
         <button class="payment-tab-btn" data-method="CARD" onclick="switchPaymentTab('CARD')">
-          <span>💳</span> Credit / Debit Card
+          <span>💳</span> Card
         </button>
       </div>
 
@@ -418,10 +504,10 @@
           <div class="upi-app-badge selected" onclick="selectUPIApp(this, 'Google Pay')">Google Pay</div>
           <div class="upi-app-badge" onclick="selectUPIApp(this, 'PhonePe')">PhonePe</div>
           <div class="upi-app-badge" onclick="selectUPIApp(this, 'Paytm')">Paytm</div>
-          <div class="upi-app-badge" onclick="selectUPIApp(this, 'BHIM')">BHIM UPI</div>
+          <div class="upi-app-badge" onclick="selectUPIApp(this, 'BHIM')">BHIM</div>
         </div>
-        <label class="form-label">Or Enter Virtual Payment Address (UPI ID)</label>
-        <input type="text" id="upi-vpa-input" class="form-input" placeholder="e.g. 9832571508@axl or yourname@okhdfcbank" value="devajyoti@okhdfcbank">
+        <label class="form-label">Or Enter UPI ID</label>
+        <input type="text" id="upi-vpa-input" class="form-input" placeholder="e.g. 9832571508@axl or name@okhdfcbank" value="devajyoti@okhdfcbank">
         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">⚡ Extra 5% instant discount is automatically applied on UPI orders!</p>
       </div>
 
@@ -431,7 +517,7 @@
           <span style="font-size: 2rem;">📦</span>
           <div>
             <strong style="font-size: 0.95rem;">Pay via Cash or QR at Doorstep</strong>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Pay securely by cash or UPI QR code when our delivery courier arrives at your location.</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Pay securely by cash or UPI QR code when our delivery courier arrives.</p>
           </div>
         </div>
       </div>
@@ -456,8 +542,8 @@
 
       <!-- Order Total Review -->
       <div style="background: #FFF; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <span style="font-weight: 700; font-size: 0.95rem;">Final Payable Amount:</span>
-        <strong style="font-size: 1.3rem; color: var(--primary);" id="checkout-payable-total">₹0</strong>
+        <span style="font-weight: 700; font-size: 0.92rem;">Payable Total:</span>
+        <strong style="font-size: 1.25rem; color: var(--primary);" id="checkout-payable-total">₹0</strong>
       </div>
 
       <button class="btn-checkout" onclick="executePlaceOrder()" id="btn-place-order">
@@ -466,59 +552,59 @@
     </div>
   </div>
 
-  <!-- 10. Order Success & Tracking Modal -->
+  <!-- 14. Order Success & Tracking Modal -->
   <div class="modal-overlay" id="order-success-modal">
-    <div class="modal-content" style="max-width: 580px; text-align: center; padding: 40px 30px;">
+    <div class="modal-content" style="max-width: 580px; text-align: center; padding: 40px 24px;">
       <button class="modal-close-btn" onclick="closeOrderSuccessModal()">✕</button>
-      <div style="font-size: 3.5rem; margin-bottom: 10px;">🎉</div>
-      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Order Placed Successfully!</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
-        Thank you for shopping at ZenithKart. We have sent a confirmation message & invoice to your registered contact.
+      <div style="font-size: 3.2rem; margin-bottom: 10px;">🎉</div>
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Order Placed Successfully!</h2>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px;">
+        Thank you for shopping at ZenithKart. Confirmation message sent to your phone.
       </p>
 
       <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 24px; text-align: left;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-          <span style="font-size: 0.85rem; color: var(--text-muted);">Order Identifier:</span>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Order ID:</span>
           <strong style="color: var(--primary); font-family: monospace; font-size: 0.95rem;" id="success-order-id">ZK-849201-9241</strong>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-          <span style="font-size: 0.85rem; color: var(--text-muted);">Estimated Delivery:</span>
-          <strong id="success-delivery-date">Wednesday, 23 Sep 2026</strong>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Est. Delivery:</span>
+          <strong id="success-delivery-date" style="font-size: 0.88rem;">Wednesday, 23 Sep 2026</strong>
         </div>
         <div style="display: flex; justify-content: space-between;">
-          <span style="font-size: 0.85rem; color: var(--text-muted);">Payment Mode:</span>
-          <strong id="success-payment-method">UPI (Verified)</strong>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Payment:</span>
+          <strong id="success-payment-method" style="font-size: 0.88rem;">UPI (Verified)</strong>
         </div>
       </div>
 
       <!-- Tracking Stepper -->
-      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; padding: 0 10px;">
+      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; padding: 0 4px;">
         <div style="text-align: center;">
-          <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--success); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">✓</div>
-          <span style="font-size: 0.75rem; font-weight: 700;">Confirmed</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--success); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; font-size: 0.72rem;">✓</div>
+          <span style="font-size: 0.72rem; font-weight: 700;">Confirmed</span>
         </div>
         <div style="text-align: center;">
-          <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">📦</div>
-          <span style="font-size: 0.75rem; font-weight: 700;">Packed</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; font-size: 0.72rem;">📦</div>
+          <span style="font-size: 0.72rem; font-weight: 700;">Packed</span>
         </div>
         <div style="text-align: center;">
-          <div style="width: 28px; height: 28px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">🚚</div>
-          <span style="font-size: 0.75rem; color: var(--text-muted);">Shipped</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; font-size: 0.72rem;">🚚</div>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Shipped</span>
         </div>
         <div style="text-align: center;">
-          <div style="width: 28px; height: 28px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">🏠</div>
-          <span style="font-size: 0.75rem; color: var(--text-muted);">Delivered</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; font-size: 0.72rem;">🏠</div>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Delivered</span>
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-        <button class="btn-card-cart" onclick="closeOrderSuccessModal(); openOrdersModal();">View Past Orders</button>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button class="btn-card-cart" onclick="closeOrderSuccessModal(); openOrdersModal();">Past Orders</button>
         <button class="btn-card-buy" onclick="closeOrderSuccessModal()">Continue Shopping</button>
       </div>
     </div>
   </div>
 
-  <!-- 11. User Auth & Profile Modal -->
+  <!-- 15. User Auth Modal -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-content" style="max-width: 440px; padding: 24px;">
       <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
@@ -565,18 +651,18 @@
     </div>
   </div>
 
-  <!-- 12. My Orders Modal -->
+  <!-- 16. My Orders Modal -->
   <div class="modal-overlay" id="orders-modal">
     <div class="modal-content" style="max-width: 720px; padding: 24px;">
       <button class="modal-close-btn" onclick="closeOrdersModal()">✕</button>
-      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 16px;">📦 My Orders & Tracking</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 16px;">📦 My Orders & Tracking</h3>
       <div id="user-orders-list">
         <!-- Rendered dynamically -->
       </div>
     </div>
   </div>
 
-  <!-- 13. AI Shopping Assistant Widget -->
+  <!-- 17. AI Shopping Assistant Floating Bubble & Responsive Chat -->
   <div class="ai-chat-bubble" onclick="toggleAIChat()" title="Chat with Zenith AI Assistant">
     ✨
   </div>
@@ -608,15 +694,15 @@
     </div>
 
     <div class="ai-chat-input-row">
-      <input type="text" id="ai-user-input" class="form-input" style="padding: 8px 12px; font-size: 0.88rem;" placeholder="Ask Zenith AI for deals, specs, or suggestions..." onkeydown="if(event.key==='Enter') executeAIChat()">
+      <input type="text" id="ai-user-input" class="form-input" style="padding: 8px 12px; font-size: 0.88rem;" placeholder="Ask Zenith AI for deals, specs..." onkeydown="if(event.key==='Enter') executeAIChat()">
       <button class="btn-card-cart" style="padding: 8px 14px;" onclick="executeAIChat()">Send</button>
     </div>
   </div>
 
-  <!-- 14. Toast Container -->
+  <!-- 18. Toast Container -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- 15. Site Footer -->
+  <!-- 19. Site Footer -->
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-col">
@@ -625,16 +711,14 @@
           <li><a href="javascript:void(0)">About Us & Story</a></li>
           <li><a href="javascript:void(0)">Careers & Engineering</a></li>
           <li><a href="javascript:void(0)">Press Releases</a></li>
-          <li><a href="javascript:void(0)">Zenith Wholesale</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Help & Support</h4>
         <ul>
           <li><a href="javascript:void(0)" onclick="openOrdersModal()">Track My Orders</a></li>
-          <li><a href="javascript:void(0)">Shipping Rates & Policies</a></li>
-          <li><a href="javascript:void(0)">7-Day Returns & Replacement</a></li>
-          <li><a href="javascript:void(0)">Help Center & 24x7 Chat</a></li>
+          <li><a href="javascript:void(0)">Shipping Rates</a></li>
+          <li><a href="javascript:void(0)">7-Day Returns</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -643,22 +727,20 @@
           <li><a href="javascript:void(0)">Terms of Use</a></li>
           <li><a href="javascript:void(0)">Privacy Policy</a></li>
           <li><a href="javascript:void(0)">Security Standards</a></li>
-          <li><a href="javascript:void(0)">EPR Compliance</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Secure Payments</h4>
-        <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">We accept all major payment networks in India:</p>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.8rem; font-weight: 700; color: #FFF;">
-          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">⚡ UPI (GPay/PhonePe)</span>
+        <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">We accept all major payment networks:</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; font-weight: 700; color: #FFF;">
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">⚡ UPI</span>
           <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💵 Cash on Delivery</span>
-          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💳 RuPay / Visa / Master</span>
-          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">🏦 Net Banking</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💳 RuPay / Visa</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 ZenithKart Inc. All rights reserved. Crafted with precision for high-performance e-commerce.</div>
+      <div>© 2026 ZenithKart Inc. All rights reserved. Ultra-Smooth Mobile & Desktop E-Commerce.</div>
       <div>Designed & Developed by <strong>Devajyoti Ghosh</strong></div>
     </div>
   </footer>

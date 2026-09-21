@@ -1598,3 +1598,493 @@ body {
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   Mobile-First Responsiveness & Compatibility Enhancements
+   (Native Flipkart & Amazon Mobile Web Experience)
+   ========================================================================== */
+
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  z-index: 1200;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px 0;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+  position: relative;
+  touch-action: manipulation;
+}
+
+.mobile-nav-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  position: relative;
+}
+
+.mobile-nav-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.mobile-nav-item.active {
+  color: var(--primary);
+}
+.mobile-nav-item.active .mobile-nav-label {
+  font-weight: 700;
+}
+
+/* Mobile Sticky Filter & Sort Toolbar */
+.mobile-filter-bar {
+  display: none;
+  position: sticky;
+  top: 104px;
+  z-index: 900;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 12px;
+  gap: 8px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-filter-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+.mobile-filter-btn.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Bottom Sheet Component (Sort, Categories, Mobile Filters) */
+.mobile-bottom-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  background: #FFF;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 2100;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.mobile-bottom-sheet.open {
+  bottom: 0;
+}
+
+.sheet-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sheet-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sort-option {
+  padding: 14px 10px;
+  border-bottom: 1px solid #F1F5F9;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sort-option:last-child {
+  border-bottom: none;
+}
+.sort-option.selected {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Mobile Sticky Bottom CTA for Product Details */
+.detail-mobile-bottom-bar {
+  display: none;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFF;
+  border-top: 1px solid var(--border-color);
+  padding: 10px 16px;
+  z-index: 100;
+  gap: 10px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+}
+.detail-mobile-bottom-bar .slide-btn {
+  flex: 1;
+  padding: 12px 10px;
+  font-size: 0.88rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Ensure inputs on mobile don't trigger iOS Safari zoom */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  body {
+    padding-bottom: 65px; /* space for mobile bottom nav */
+  }
+
+  .top-ticker {
+    display: none; /* Keep header clean on small mobile */
+  }
+
+  .nav-container {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .brand-logo img {
+    height: 38px;
+  }
+
+  .delivery-location {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+  .nav-actions .ai-launch-btn,
+  .nav-actions .cart-btn,
+  .nav-actions #user-nav-btn {
+    display: none; /* Moved to mobile bottom navigation */
+  }
+
+  .search-wrapper {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .search-category-select {
+    display: none; /* Hide category select inside search box on mobile to maximize search space */
+  }
+
+  .search-box {
+    border-radius: var(--radius-full);
+    border-width: 1.5px;
+  }
+
+  .categories-nav {
+    border-bottom: 1px solid var(--border-color);
+  }
+  .categories-container {
+    padding: 6px 12px;
+    gap: 10px;
+  }
+  .cat-pill {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+
+  .hero-section {
+    margin: 8px auto 0;
+    padding: 0 12px;
+  }
+  .carousel-container {
+    min-height: 180px;
+    border-radius: var(--radius-md);
+  }
+  .carousel-slide {
+    padding: 24px 20px;
+    min-height: 180px;
+  }
+  .slide-title {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .slide-desc {
+    display: none; /* Hide long paragraph on mobile for cleaner banner */
+  }
+  .slide-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+  .carousel-btn {
+    display: none; /* Swiping handles navigation on mobile */
+  }
+
+  .flash-deals-ribbon {
+    margin: 12px auto 0;
+    padding: 0 12px;
+  }
+  .deals-bar {
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .deals-title {
+    font-size: 1rem;
+  }
+  .deals-info p {
+    display: none;
+  }
+  .timer-container {
+    padding: 4px 8px;
+    font-size: 0.82rem;
+  }
+
+  /* Main Layout */
+  .main-layout {
+    margin: 12px auto 30px;
+    padding: 0 12px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Sticky mobile filter toolbar */
+  .mobile-filter-bar {
+    display: flex;
+  }
+
+  /* Hide desktop catalog header elements */
+  .catalog-header {
+    display: none;
+  }
+
+  /* Desktop filters sidebar becomes slide-up drawer on mobile */
+  .filters-sidebar {
+    display: none;
+    position: fixed;
+    inset: auto 0 0 0;
+    max-height: 82vh;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 2200;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+    padding: 20px;
+    animation: slideUpMobile 0.3s ease;
+  }
+  .filters-sidebar.open-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+  @keyframes slideUpMobile {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  /* 2-Column Product Grid (Flipkart/Amazon Mobile Standard) */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product-card {
+    border-radius: var(--radius-sm);
+  }
+  .product-img-wrapper {
+    height: 140px;
+    padding: 8px;
+  }
+  .product-info {
+    padding: 10px;
+  }
+  .product-brand {
+    font-size: 0.68rem;
+  }
+  .product-title {
+    font-size: 0.82rem;
+    height: 2.5em;
+    margin-bottom: 6px;
+  }
+  .rating-pill {
+    font-size: 0.68rem;
+    padding: 1px 4px;
+  }
+  .reviews-count {
+    font-size: 0.68rem;
+  }
+  .price-current {
+    font-size: 1rem;
+  }
+  .price-mrp {
+    font-size: 0.75rem;
+  }
+  .price-saved {
+    display: none; /* Save space on mobile cards */
+  }
+
+  .product-card-actions {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .btn-card-buy {
+    display: none; /* Add to cart is primary on card, buy now available in details modal */
+  }
+  .btn-card-cart {
+    padding: 6px;
+    font-size: 0.78rem;
+  }
+
+  /* Mobile Bottom Navigation */
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  /* Floating AI Assistant Bubble on Mobile */
+  .ai-chat-bubble {
+    bottom: 74px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+
+  .ai-chat-window {
+    bottom: 70px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    height: calc(100vh - 120px);
+    max-height: 560px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Modals on Mobile: Fullscreen friendly */
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal-content {
+    border-radius: 20px 20px 0 0;
+    max-height: 92vh;
+    width: 100%;
+    margin: 0;
+  }
+
+  .product-detail-layout {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 80px; /* bottom padding for sticky bar */
+    gap: 16px;
+  }
+  .main-preview-img {
+    height: 240px;
+  }
+
+  .detail-mobile-bottom-bar {
+    display: flex;
+  }
+  .detail-content .slide-btn {
+    display: none; /* Moved to detail-mobile-bottom-bar on mobile */
+  }
+
+  /* Cart Drawer on Mobile */
+  .cart-drawer {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  /* Checkout Modal on Mobile */
+  .checkout-modal-content {
+    padding: 20px 16px 40px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .form-group-full {
+    grid-column: span 1;
+  }
+  .upi-apps-row {
+    flex-wrap: wrap;
+  }
+  .upi-app-badge {
+    flex: 1 1 calc(50% - 10px);
+    justify-content: center;
+  }
+
+  /* Footer on Mobile */
+  .site-footer {
+    padding: 30px 16px 80px;
+    margin-top: 40px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+/* Extra small devices (iPhone SE 1st gen, small Androids < 360px) */
+@media screen and (max-width: 350px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-img-wrapper {
+    height: 180px;
+  }
+  .mobile-filter-bar {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .mobile-filter-btn {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+}

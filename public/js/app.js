@@ -1305,3 +1305,228 @@ function openAddressEdit() {
     showToast(`Delivery location updated to ${newLoc.trim()}!`);
   }
 }
+
+// ==========================================================================
+// Mobile-Specific Interactivity & Touch Gestures
+// ==========================================================================
+
+// Touch swipe support for Carousel
+function initCarouselTouch() {
+  const container = document.getElementById('carousel-container');
+  if (!container) return;
+
+  let startX = 0;
+  let endX = 0;
+
+  container.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX;
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    const diff = startX - endX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        // Swiped left -> next slide
+        document.getElementById('carousel-next')?.click();
+      } else {
+        // Swiped right -> prev slide
+        document.getElementById('carousel-prev')?.click();
+      }
+    }
+    startX = 0;
+    endX = 0;
+  });
+}
+
+// Mobile Bottom Navigation Handler
+function handleMobileNav(tab) {
+  document.querySelectorAll('.mobile-nav-item').forEach(btn => btn.classList.remove('active'));
+
+  if (tab === 'home') {
+    document.getElementById('mob-nav-home')?.classList.add('active');
+    resetAllFilters();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (tab === 'categories') {
+    document.getElementById('mob-nav-cat')?.classList.add('active');
+    openMobileCategoriesSheet();
+  } else if (tab === 'deals') {
+    document.getElementById('mob-nav-deals')?.classList.add('active');
+    state.activeFilters.dealsOnly = true;
+    const dealsCb = document.getElementById('filter-deals-only');
+    if (dealsCb) dealsCb.checked = true;
+    state.activeFilters.page = 1;
+    fetchProducts();
+    document.getElementById('products-grid')?.scrollIntoView({ behavior: 'smooth' });
+  } else if (tab === 'cart') {
+    document.getElementById('mob-nav-cart')?.classList.add('active');
+    toggleCartDrawer(true);
+  } else if (tab === 'account') {
+    document.getElementById('mob-nav-account')?.classList.add('active');
+    handleUserNavClick();
+  }
+}
+
+// Mobile Sort Sheet
+function openMobileSortSheet() {
+  document.getElementById('sort-backdrop')?.classList.add('open');
+  document.getElementById('sort-sheet')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileSortSheet() {
+  document.getElementById('sort-backdrop')?.classList.remove('open');
+  document.getElementById('sort-sheet')?.classList.remove('open');
+  document.body.style.overflow = 'auto';
+}
+
+function selectMobileSort(sortValue) {
+  state.activeFilters.sort = sortValue;
+  const select = document.getElementById('sort-select');
+  if (select) select.value = sortValue;
+
+  document.querySelectorAll('.sort-option').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.sort === sortValue);
+  });
+
+  closeMobileSortSheet();
+  state.activeFilters.page = 1;
+  fetchProducts();
+  showToast(`Sorted by ${sortValue.replace('_', ' ')}`);
+}
+
+// Mobile Categories Sheet
+function openMobileCategoriesSheet() {
+  const container = document.getElementById('mobile-categories-list');
+  if (container && state.categories.length > 0) {
+    container.innerHTML = `
+      <div class="sort-option ${state.activeFilters.category === 'all' ? 'selected' : ''}" onclick="selectMobileCategory('all')">
+        <span>⚡ All Categories</span>
+        <span>1,080 products</span>
+      </div>
+      ${state.categories.map(c => `
+        <div class="sort-option ${state.activeFilters.category === c.id ? 'selected' : ''}" onclick="selectMobileCategory('${c.id}')">
+          <span>${c.name}</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">${c.count} items</span>
+        </div>
+      `).join('')}
+    `;
+  }
+  document.getElementById('categories-backdrop')?.classList.add('open');
+  document.getElementById('categories-sheet')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileCategoriesSheet() {
+  document.getElementById('categories-backdrop')?.classList.remove('open');
+  document.getElementById('categories-sheet')?.classList.remove('open');
+  document.body.style.overflow = 'auto';
+}
+
+function selectMobileCategory(catId) {
+  closeMobileCategoriesSheet();
+  applyCategoryFilter(catId);
+}
+
+// Mobile Filter Sheet
+function toggleMobileFilterSheet(isOpen) {
+  const sidebar = document.getElementById('filters-sidebar');
+  const backdrop = document.getElementById('filter-sheet-backdrop');
+  const closeBtn = document.getElementById('filter-sheet-close');
+
+  if (isOpen) {
+    sidebar?.classList.add('open-mobile');
+    backdrop?.classList.add('open');
+    if (closeBtn) closeBtn.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  } else {
+    sidebar?.classList.remove('open-mobile');
+    backdrop?.classList.remove('open');
+    if (closeBtn) closeBtn.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function toggleMobileDeals() {
+  state.activeFilters.dealsOnly = !state.activeFilters.dealsOnly;
+  const btn = document.getElementById('mob-deals-btn');
+  const cb = document.getElementById('filter-deals-only');
+  if (btn) btn.classList.toggle('active', state.activeFilters.dealsOnly);
+  if (cb) cb.checked = state.activeFilters.dealsOnly;
+  state.activeFilters.page = 1;
+  fetchProducts();
+}
+
+// Sync mobile badges in real-time
+const originalUpdateCartBadge = updateCartBadge;
+updateCartBadge = function() {
+  originalUpdateCartBadge();
+  const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+  const mobCart = document.getElementById('mob-cart-badge');
+  if (mobCart) mobCart.textContent = totalItems;
+};
+
+const originalCheckUserSession = checkUserSession;
+checkUserSession = function() {
+  originalCheckUserSession();
+  const mobAccLabel = document.getElementById('mob-account-label');
+  if (state.currentUser && mobAccLabel) {
+    mobAccLabel.textContent = state.currentUser.name.split(' ')[0];
+  }
+};
+
+// Update filter count badge on mobile
+const originalRenderActiveFilterChips = renderActiveFilterChips;
+renderActiveFilterChips = function() {
+  originalRenderActiveFilterChips();
+  let count = 0;
+  if (state.activeFilters.category !== 'all') count++;
+  if (state.activeFilters.search) count++;
+  if (state.activeFilters.dealsOnly) count++;
+  if (state.activeFilters.brands.length) count += state.activeFilters.brands.length;
+  if (state.activeFilters.minPrice || state.activeFilters.maxPrice) count++;
+  if (state.activeFilters.minRating) count++;
+
+  const badge = document.getElementById('mobile-filter-badge');
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+};
+
+// Add sticky bottom bar in product details modal for mobile
+const originalOpenProductModal = openProductModal;
+openProductModal = async function(id) {
+  await originalOpenProductModal(id);
+  const layout = document.getElementById('product-detail-content');
+  if (layout) {
+    const bottomBar = document.createElement('div');
+    bottomBar.className = 'detail-mobile-bottom-bar';
+    bottomBar.innerHTML = `
+      <button class="slide-btn" style="background: var(--primary);" onclick="addToCartFromDetail(${id})">
+        🛒 Add to Cart
+      </button>
+      <button class="slide-btn" style="background: var(--accent); color: #000;" onclick="buyNowFromDetail(${id})">
+        ⚡ Buy Now
+      </button>
+    `;
+    layout.appendChild(bottomBar);
+  }
+};
+
+// Attach Touch Handlers on DOM Ready
+document.addEventListener('DOMContentLoaded', () => {
+  initCarouselTouch();
+});
+
+// Progressive Web App (PWA) Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(err => {
+      console.log('ServiceWorker not registered in environment:', err);
+    });
+  });
+}

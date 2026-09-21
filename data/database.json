@@ -34574,6 +34574,35 @@
   ],
   "orders": [
     {
+      "id": "ZK-275565-8296",
+      "userId": "usr_demo_1",
+      "items": [
+        {
+          "id": 1,
+          "title": "Sample Phone",
+          "price": 14999,
+          "qty": 1,
+          "image": "test.jpg"
+        }
+      ],
+      "shippingAddress": {
+        "name": "Devajyoti Ghosh",
+        "phone": "+91 98325 71508",
+        "address": "Ward 12, Bolpur",
+        "city": "Bolpur",
+        "pincode": "731204"
+      },
+      "paymentMethod": "UPI",
+      "paymentDetails": {},
+      "totals": {
+        "grandTotal": 14999
+      },
+      "status": "Paid & Confirmed",
+      "trackingStatus": "Processing",
+      "createdAt": "2026-09-20T18:01:15.565Z",
+      "estimatedDelivery": "Wed Sep 23 2026"
+    },
+    {
       "id": "ZK-130225-1670",
       "userId": "usr_demo_1",
       "items": [

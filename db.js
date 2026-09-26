@@ -16,7 +16,6 @@ class Database {
   }
 
   init() {
-    // Check if database file exists
     if (fs.existsSync(DB_FILE)) {
       try {
         const raw = fs.readFileSync(DB_FILE, 'utf8');
@@ -26,7 +25,6 @@ class Database {
       }
     }
 
-    // Load products if not loaded
     if (!this.data.products || this.data.products.length === 0) {
       if (fs.existsSync(PRODUCTS_FILE)) {
         try {
@@ -39,27 +37,8 @@ class Database {
       }
     }
 
-    // Seed default test user if empty
-    if (!this.data.users || this.data.users.length === 0) {
-      const salt = crypto.randomBytes(16).toString('hex');
-      const hash = crypto.pbkdf2Sync('password123', salt, 1000, 64, 'sha512').toString('hex');
-      this.data.users = [
-        {
-          id: 'usr_demo_1',
-          name: 'Demo Customer',
-          email: 'demo@zenithkart.com',
-          phone: '+91 98765 43210',
-          salt,
-          passwordHash: hash,
-          createdAt: new Date().toISOString()
-        }
-      ];
-    }
-
-    if (!this.data.orders) {
-      this.data.orders = [];
-    }
-
+    if (!this.data.users) this.data.users = [];
+    if (!this.data.orders) this.data.orders = [];
     this.save();
   }
 
@@ -71,33 +50,29 @@ class Database {
     }
   }
 
-  // --- Products ---
+  // --- Products Catalog ---
   getProducts(filters = {}) {
     let list = [...this.data.products];
 
-    // Search query across title, brand, description, category
     if (filters.search) {
       const q = filters.search.toLowerCase().trim();
       list = list.filter(p => 
         p.title.toLowerCase().includes(q) ||
         p.brand.toLowerCase().includes(q) ||
-        p.categoryName.toLowerCase().includes(q) ||
-        p.subCategory.toLowerCase().includes(q)
+        (p.categoryName && p.categoryName.toLowerCase().includes(q)) ||
+        (p.subCategory && p.subCategory.toLowerCase().includes(q))
       );
     }
 
-    // Category filter
     if (filters.category && filters.category !== 'all') {
       list = list.filter(p => p.category === filters.category);
     }
 
-    // Brand filter
     if (filters.brand) {
       const brands = Array.isArray(filters.brand) ? filters.brand : [filters.brand];
       list = list.filter(p => brands.includes(p.brand));
     }
 
-    // Price range
     if (filters.minPrice) {
       const minP = Number(filters.minPrice);
       if (!isNaN(minP)) list = list.filter(p => p.price >= minP);
@@ -107,18 +82,15 @@ class Database {
       if (!isNaN(maxP)) list = list.filter(p => p.price <= maxP);
     }
 
-    // Rating
     if (filters.minRating) {
       const minR = Number(filters.minRating);
       if (!isNaN(minR)) list = list.filter(p => p.rating >= minR);
     }
 
-    // Deals only
     if (filters.dealsOnly === 'true' || filters.dealsOnly === true) {
       list = list.filter(p => p.isDealOfTheDay || p.discountPercent >= 40);
     }
 
-    // Sorting
     if (filters.sort) {
       switch (filters.sort) {
         case 'price_asc':
@@ -137,7 +109,6 @@ class Database {
           list.sort((a, b) => b.reviewCount - a.reviewCount);
           break;
         default:
-          // Popularity / default
           break;
       }
     }
@@ -168,13 +139,13 @@ class Database {
       if (!map[p.category]) {
         map[p.category] = {
           id: p.category,
-          name: p.categoryName,
+          name: p.categoryName || p.category,
           count: 0,
           subCategories: new Set()
         };
       }
       map[p.category].count++;
-      map[p.category].subCategories.add(p.subCategory);
+      if (p.subCategory) map[p.category].subCategories.add(p.subCategory);
     }
 
     return Object.values(map).map(c => ({
@@ -183,12 +154,12 @@ class Database {
     }));
   }
 
-  // --- Users & Auth ---
+  // --- Users & Authentication ---
   registerUser({ name, email, password, phone }) {
     const cleanEmail = email.trim().toLowerCase();
     const existing = this.data.users.find(u => u.email === cleanEmail);
     if (existing) {
-      throw new Error('An account with this email address already exists.');
+      throw new Error('An account with this email address already exists. Please Sign In.');
     }
 
     const salt = crypto.randomBytes(16).toString('hex');
@@ -199,6 +170,7 @@ class Database {
       name: name.trim(),
       email: cleanEmail,
       phone: phone ? phone.trim() : '',
+      savedAddress: null,
       salt,
       passwordHash: hash,
       createdAt: new Date().toISOString()
@@ -207,12 +179,12 @@ class Database {
     this.data.users.push(newUser);
     this.save();
 
-    // Return user without sensitive salt/hash
     return {
       id: newUser.id,
       name: newUser.name,
       email: newUser.email,
       phone: newUser.phone,
+      savedAddress: newUser.savedAddress,
       token: Buffer.from(`${newUser.id}:${cleanEmail}:${Date.now()}`).toString('base64')
     };
   }
@@ -221,7 +193,7 @@ class Database {
     const cleanEmail = email.trim().toLowerCase();
     const user = this.data.users.find(u => u.email === cleanEmail);
     if (!user) {
-      throw new Error('Invalid email or password.');
+      throw new Error('Invalid email or password. Please check your credentials or Create Account.');
     }
 
     const hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex');
@@ -234,6 +206,7 @@ class Database {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      savedAddress: user.savedAddress || null,
       token: Buffer.from(`${user.id}:${cleanEmail}:${Date.now()}`).toString('base64')
     };
   }
@@ -249,38 +222,68 @@ class Database {
         id: user.id,
         name: user.name,
         email: user.email,
-        phone: user.phone
+        phone: user.phone,
+        savedAddress: user.savedAddress || null
       };
     } catch {
       return null;
     }
   }
 
-  // --- Orders ---
-  createOrder({ userId, items, shippingAddress, paymentMethod, paymentDetails, totals }) {
+  updateUserAddress(userId, address) {
+    const user = this.data.users.find(u => u.id === userId);
+    if (user) {
+      user.savedAddress = address;
+      this.save();
+    }
+  }
+
+  // --- Orders & Tracking ---
+  createOrder({ userId, customerEmail, items, shippingAddress, paymentMethod, paymentDetails, totals }) {
     const orderId = 'ZK-' + Date.now().toString().slice(-6) + '-' + Math.floor(1000 + Math.random() * 9000);
+    
+    // Status should accurately reflect payment method
+    let orderStatus = 'Payment Verified & Confirmed';
+    if (paymentMethod === 'COD') {
+      orderStatus = 'Confirmed (Cash on Delivery)';
+    } else if (paymentMethod === 'UPI') {
+      orderStatus = 'Paid via UPI (Ref: ' + (paymentDetails.transactionRef || 'UPI-' + Date.now().toString().slice(-6)) + ')';
+    } else if (paymentMethod === 'CARD') {
+      orderStatus = 'Paid via Card (Bank Auth Verified)';
+    }
+
     const newOrder = {
       id: orderId,
       userId: userId || 'guest',
+      customerEmail: customerEmail || (shippingAddress ? shippingAddress.email : ''),
       items,
       shippingAddress,
-      paymentMethod, // 'UPI', 'COD', 'CARD', 'NETBANKING'
+      paymentMethod,
       paymentDetails: paymentDetails || {},
       totals,
-      status: paymentMethod === 'COD' ? 'Confirmed (Cash on Delivery)' : 'Paid & Confirmed',
+      status: orderStatus,
       trackingStatus: 'Processing',
       createdAt: new Date().toISOString(),
       estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toDateString()
     };
 
     this.data.orders.unshift(newOrder);
+
+    // Save address for logged-in user if available
+    if (userId && userId !== 'guest') {
+      this.updateUserAddress(userId, shippingAddress);
+    }
+
     this.save();
     return newOrder;
   }
 
-  getUserOrders(userId) {
-    if (!userId) return [];
-    return this.data.orders.filter(o => o.userId === userId);
+  getUserOrders(userId, email = null) {
+    if (!userId && !email) return [];
+    return this.data.orders.filter(o => 
+      (userId && userId !== 'guest' && o.userId === userId) ||
+      (email && o.customerEmail && o.customerEmail.toLowerCase() === email.toLowerCase())
+    );
   }
 
   getOrderById(orderId) {

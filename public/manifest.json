@@ -1,0 +1,19 @@
+{
+  "name": "ZenithKart - Mega Online Shopping Store",
+  "short_name": "ZenithKart",
+  "description": "Shop 1,000+ top electronics, mobiles, fashion, and home appliances with fast delivery and UPI/COD.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F1F3F6",
+  "theme_color": "#2874F0",
+  "icons": [
+    {
+      "src": "/images/favicon.svg",
+      "sizes": "64x64 128x128 192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "ecommerce", "lifestyle"]
+}

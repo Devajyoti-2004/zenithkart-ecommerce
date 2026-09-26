@@ -5,11 +5,11 @@ const url = require('url');
 
 const db = require('./db');
 const { handleAIChat } = require('./aiAssistant');
+const emailService = require('./emailService');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
-// MIME types for static file serving
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -25,7 +25,6 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
-// Helper to send JSON response
 function sendJSON(res, statusCode, data) {
   res.writeHead(statusCode, {
     'Content-Type': 'application/json',
@@ -36,7 +35,6 @@ function sendJSON(res, statusCode, data) {
   res.end(JSON.stringify(data));
 }
 
-// Parse request body
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
@@ -59,7 +57,6 @@ function parseBody(req) {
   });
 }
 
-// Extract auth token from header
 function getAuthToken(req) {
   const authHeader = req.headers['authorization'];
   if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -68,9 +65,7 @@ function getAuthToken(req) {
   return null;
 }
 
-// Main HTTP request handler (works with Node http and can be mounted in Express)
 async function handleRequest(req, res) {
-  // CORS Preflight
   if (req.method === 'OPTIONS') {
     res.writeHead(204, {
       'Access-Control-Allow-Origin': '*',
@@ -152,8 +147,11 @@ async function handleRequest(req, res) {
           return sendJSON(res, 400, { error: 'Shipping details are incomplete.' });
         }
 
+        const customerEmail = body.customerEmail || (user ? user.email : (body.shippingAddress.email || ''));
+
         const order = db.createOrder({
           userId: user ? user.id : (body.userId || 'guest'),
+          customerEmail,
           items: body.items,
           shippingAddress: body.shippingAddress,
           paymentMethod: body.paymentMethod || 'COD',
@@ -161,9 +159,13 @@ async function handleRequest(req, res) {
           totals: body.totals || { grandTotal: 0 }
         });
 
+        // Trigger Order Confirmation Email (Live SMTP or simulation log)
+        const emailResult = await emailService.sendOrderConfirmation(order);
+
         return sendJSON(res, 201, {
           message: 'Order placed successfully!',
-          order
+          order,
+          emailNotice: emailResult.deliveredTo
         });
       }
 
@@ -171,8 +173,9 @@ async function handleRequest(req, res) {
       if (req.method === 'GET' && pathname === '/api/orders') {
         const token = getAuthToken(req);
         const user = db.getUserByToken(token);
-        const userId = user ? user.id : (query.userId || 'guest');
-        const orders = db.getUserOrders(userId);
+        const userId = user ? user.id : (query.userId || null);
+        const email = user ? user.email : (query.email || null);
+        const orders = db.getUserOrders(userId, email);
         return sendJSON(res, 200, { orders });
       }
 
@@ -186,7 +189,20 @@ async function handleRequest(req, res) {
         return sendJSON(res, 200, order);
       }
 
-      // 10. POST /api/ai/chat
+      // 10. GET /api/notifications/latest
+      if (req.method === 'GET' && pathname === '/api/notifications/latest') {
+        const logPath = path.join(__dirname, 'data', 'email_notifications.log');
+        let logs = [];
+        if (fs.existsSync(logPath)) {
+          const lines = fs.readFileSync(logPath, 'utf8').trim().split('\n');
+          logs = lines.filter(Boolean).map(l => {
+            try { return JSON.parse(l); } catch { return null; }
+          }).filter(Boolean).reverse().slice(0, 10);
+        }
+        return sendJSON(res, 200, { notifications: logs });
+      }
+
+      // 11. POST /api/ai/chat
       if (req.method === 'POST' && pathname === '/api/ai/chat') {
         const body = await parseBody(req);
         if (!body.prompt) {
@@ -196,7 +212,6 @@ async function handleRequest(req, res) {
         return sendJSON(res, 200, aiResponse);
       }
 
-      // 404 for unknown API
       return sendJSON(res, 404, { error: 'Endpoint not found' });
     } catch (err) {
       console.error('API Error:', err);
@@ -212,10 +227,8 @@ async function handleRequest(req, res) {
 
   const filePath = path.join(PUBLIC_DIR, safePath);
 
-  // Check if file exists
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      // Fallback to index.html for SPA-style client routing if not an asset
       if (!path.extname(safePath)) {
         const indexPath = path.join(PUBLIC_DIR, 'index.html');
         return fs.readFile(indexPath, (readErr, content) => {
@@ -235,7 +248,6 @@ async function handleRequest(req, res) {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    // Stream the file with cache headers for assets
     res.writeHead(200, {
       'Content-Type': contentType,
       'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=86400'
@@ -245,16 +257,16 @@ async function handleRequest(req, res) {
   });
 }
 
-// Start Server
 const server = http.createServer(handleRequest);
 
 server.listen(PORT, () => {
   console.log(`===================================================`);
   console.log(`🚀 ZenithKart E-Commerce Platform Server Running!`);
   console.log(`🌐 Local URL: http://localhost:${PORT}`);
-  console.log(`📦 Loaded Catalog: 1,080+ Products`);
+  console.log(`📦 Loaded Catalog: 1,040 Authentic Real Products`);
   console.log(`🤖 AI Shopping Assistant: Ready`);
-  console.log(`💳 UPI, COD, & Card Processing: Active`);
+  console.log(`💳 Realistic Multi-Step UPI / COD / Card Gateway: Active`);
+  console.log(`📧 Order Confirmation Email Notifications: Active`);
   console.log(`===================================================`);
 });
 

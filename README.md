@@ -70,7 +70,7 @@ ZenithKart is built from the ground up to feel like a native mobile app on smart
 ### 4. 💳 Indian Payment Gateway & Checkout
 - Delivery address confirmation with pre-filled defaults.
 - **Payment Methods**:
-  - ⚡ **UPI**: One-click selection for Google Pay, PhonePe, Paytm, BHIM, or enter any UPI VPA (e.g. `user@okhdfcbank`) with 5% instant discount.
+  - ⚡ **UPI**: One-click selection for Google Pay, PhonePe, Paytm, BHIM, or enter any UPI VPA (e.g. `user@upi`) with 5% instant discount.
   - 💵 **Cash on Delivery (COD)**: Doorstep cash/QR option.
   - 💳 **Credit / Debit Cards**: Card number, Expiry, CVV validation.
 - Order confirmation screen with unique order ID (`ZK-XXXXXX`), estimated delivery date, and a visual 4-step tracking stepper (`Confirmed ➔ Packed ➔ Shipped ➔ Delivered`).

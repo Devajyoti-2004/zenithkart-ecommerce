@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#2874F0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>ZenithKart | India's Mega Online Store - 1,000+ Products</title>
+  <title>ZenithKart | India's Mega Online Store - 1,000+ Real Products</title>
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="apple-touch-icon" href="/images/favicon.svg">
   <link rel="manifest" href="/manifest.json">
@@ -17,10 +17,10 @@
   <!-- 1. Top Announcement Bar (Desktop) -->
   <div class="top-ticker">
     <div class="ticker-content">
-      <span>🎉 <span class="highlight">MEGA FESTIVE SAVER DAYS:</span> Up to 70% OFF + Flat ₹200 off on UPI & Free COD Available! Use Code: <span class="highlight">FESTIVE10</span></span>
+      <span>🎉 <span class="highlight">FESTIVE MEGA SAVER SALE:</span> Up to 60% OFF + Flat ₹200 off on UPI & Free COD Available! Use Code: <span class="highlight">FESTIVE10</span></span>
     </div>
     <div class="ticker-links">
-      <a href="#deals-section">🔥 Deal of the Day</a>
+      <a href="#deals-section">🔥 Deals of the Day</a>
       <a href="javascript:void(0)" onclick="openAIChat('Show me best discounts today')">✨ AI Deals Finder</a>
       <a href="javascript:void(0)" onclick="openOrdersModal()">📦 Track Order</a>
     </div>
@@ -29,17 +29,17 @@
   <!-- 2. Sticky Navbar -->
   <header class="navbar">
     <div class="nav-container">
-      <!-- Logo -->
+      <!-- Brand Logo -->
       <a href="/" class="brand-logo" title="ZenithKart Home">
         <img src="/images/logo.svg" alt="ZenithKart Logo">
       </a>
 
-      <!-- Delivery Location (Desktop) -->
-      <div class="delivery-location" onclick="openAddressEdit()" title="Change delivery location">
+      <!-- Delivery Location (Generic - No personal info) -->
+      <div class="delivery-location" onclick="openAddressEdit()" title="Set delivery location">
         <span style="font-size: 1.2rem;">📍</span>
         <div>
           <span style="font-size: 0.72rem; color: #94A3B8;">Deliver to</span>
-          <strong id="header-location">Bolpur 731204</strong>
+          <strong id="header-location">Select Location</strong>
         </div>
       </div>
 
@@ -57,7 +57,7 @@
             <option value="beauty-grooming">Beauty & Grooming</option>
             <option value="books-stationery">Books & Stationery</option>
           </select>
-          <input type="text" id="search-input" class="search-input" placeholder="Search 1,000+ products, brands, deals..." autocomplete="off">
+          <input type="text" id="search-input" class="search-input" placeholder="Search 1,000+ real products, brands, models..." autocomplete="off">
           <button id="search-clear" class="search-clear-btn" title="Clear">✕</button>
           <button id="search-btn" class="search-submit-btn" title="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -70,7 +70,7 @@
       <!-- Nav Actions (Desktop) -->
       <div class="nav-actions">
         <!-- AI Assistant Launch Button -->
-        <button class="nav-btn ai-launch-btn" onclick="toggleAIChat()" title="Ask Zenith AI Shopping Assistant">
+        <button class="nav-btn ai-launch-btn" onclick="toggleAIChat()" title="Ask Zenith AI Assistant">
           <span>✨</span> Ask AI
         </button>
 
@@ -120,17 +120,17 @@
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">⚡ Festive Mega Deal</span>
-            <h1 class="slide-title">Next-Gen Tech & Laptops</h1>
-            <p class="slide-desc">Save up to 45% on Dell, HP, Lenovo & Sony with No-Cost EMI & instant ₹2,000 off on cards.</p>
-            <button class="slide-btn" onclick="applyCategoryFilter('electronics')">Explore Electronics ➔</button>
+            <h1 class="slide-title">Apple MacBooks & Dell Laptops</h1>
+            <p class="slide-desc">Save up to 35% on MacBook Air M3, Dell Inspiron & HP Victus with No-Cost EMI & instant UPI discounts.</p>
+            <button class="slide-btn" onclick="applyCategoryFilter('electronics')">Explore Laptops ➔</button>
           </div>
         </div>
         <!-- Slide 2: Smartphones 5G -->
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">📱 5G Revolution</span>
-            <h1 class="slide-title">Flagship 5G Smartphones</h1>
-            <p class="slide-desc">Top-rated Samsung, Apple, OnePlus & Infinix devices. Flat ₹1,500 extra off with UPI!</p>
+            <h1 class="slide-title">iPhone 15 & Galaxy S24 Ultra</h1>
+            <p class="slide-desc">Top-rated Apple, Samsung & OnePlus flagships. Flat ₹2,000 extra off with verified UPI checkout!</p>
             <button class="slide-btn" onclick="applyCategoryFilter('mobiles')">Shop Mobiles ➔</button>
           </div>
         </div>
@@ -138,8 +138,8 @@
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">👗 Festive Wardrobe</span>
-            <h1 class="slide-title">Trending Styles: 50% - 70% OFF</h1>
-            <p class="slide-desc">Bestselling ethnic wear, jeans, running sneakers & designer accessories from Nike & Puma.</p>
+            <h1 class="slide-title">Nike, Levi's & BIBA: 40% - 60% OFF</h1>
+            <p class="slide-desc">Authentic Nike Air Force 1, Levi's 511 jeans, GIVA silver jewelry & BIBA silk anarkalis.</p>
             <button class="slide-btn" onclick="applyCategoryFilter('fashion-men')">Upgrade Style ➔</button>
           </div>
         </div>
@@ -147,8 +147,8 @@
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&auto=format&fit=crop&q=80');">
           <div class="slide-content">
             <span class="slide-tag">🏠 Smart Home</span>
-            <h1 class="slide-title">Kitchen & Home Appliances</h1>
-            <p class="slide-desc">Digital Air Fryers, Nutri-Blenders & Purifiers from Philips & Prestige. Free COD.</p>
+            <h1 class="slide-title">Philips Air Fryers & Prestige Cookware</h1>
+            <p class="slide-desc">Digital Rapid-Air fryers, mixer grinders & Kent water purifiers. Free Cash on Delivery.</p>
             <button class="slide-btn" onclick="applyCategoryFilter('home-kitchen')">Shop Home ➔</button>
           </div>
         </div>
@@ -170,8 +170,8 @@
       <div class="deals-info">
         <span style="font-size: 1.5rem;">⚡</span>
         <div>
-          <div class="deals-title">Deal of the Day & Offers</div>
-          <p style="font-size: 0.85rem; color: #BFDBFE;">Massive price drops across top brands • Cash on Delivery available</p>
+          <div class="deals-title">Deals of the Day & Special Offers</div>
+          <p style="font-size: 0.85rem; color: #BFDBFE;">100% Genuine Branded Products • Fast Delivery • Cash on Delivery Available</p>
         </div>
       </div>
       <div class="timer-container">
@@ -296,7 +296,7 @@
       <!-- Catalog Controls Header (Desktop) -->
       <div class="catalog-header">
         <div class="catalog-stats">
-          <span id="catalog-count-text">Showing <strong>1 - 24</strong> of <strong>1,080</strong> products</span>
+          <span id="catalog-count-text">Showing <strong>1 - 24</strong> of <strong>1,040</strong> products</span>
         </div>
         <div class="catalog-sort">
           <label for="sort-select">Sort by:</label>
@@ -314,7 +314,7 @@
       <!-- Active Filter Chips -->
       <div class="active-filters-chips" id="active-filter-chips"></div>
 
-      <!-- Product Cards Grid (2 Columns on Mobile, responsive up to 5 on wide screens) -->
+      <!-- Product Cards Grid -->
       <div class="products-grid" id="products-grid">
         <!-- Rendered dynamically -->
       </div>
@@ -326,7 +326,7 @@
     </section>
   </main>
 
-  <!-- 8. Mobile Bottom Navigation Bar -->
+  <!-- 8. Mobile Bottom Navigation Bar (5 Primary Tabs) -->
   <nav class="mobile-bottom-nav">
     <button class="mobile-nav-item active" id="mob-nav-home" onclick="handleMobileNav('home')">
       <span class="mobile-nav-icon">🏠</span>
@@ -340,16 +340,16 @@
       <span class="mobile-nav-icon">⚡</span>
       <span class="mobile-nav-label">Deals</span>
     </button>
+    <button class="mobile-nav-item" id="mob-nav-orders" onclick="handleMobileNav('orders')">
+      <span class="mobile-nav-icon">📦</span>
+      <span class="mobile-nav-label">My Orders</span>
+    </button>
     <button class="mobile-nav-item" id="mob-nav-cart" onclick="handleMobileNav('cart')">
       <span class="mobile-nav-icon">
         🛒
         <span class="badge-count" id="mob-cart-badge">0</span>
       </span>
       <span class="mobile-nav-label">Cart</span>
-    </button>
-    <button class="mobile-nav-item" id="mob-nav-account" onclick="handleMobileNav('account')">
-      <span class="mobile-nav-icon">👤</span>
-      <span class="mobile-nav-label" id="mob-account-label">Account</span>
     </button>
   </nav>
 
@@ -435,11 +435,11 @@
         </tr>
       </table>
 
-      <button class="btn-checkout" onclick="proceedToCheckout()">Proceed to Buy ➔</button>
+      <button class="btn-checkout" onclick="proceedToCheckout()" id="cart-proceed-btn">Proceed to Buy ➔</button>
     </div>
   </aside>
 
-  <!-- 12. Product Details Modal with Sticky Mobile Bottom Bar -->
+  <!-- 12. Product Details Modal -->
   <div class="modal-overlay" id="product-modal">
     <div class="modal-content">
       <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
@@ -449,34 +449,68 @@
     </div>
   </div>
 
-  <!-- 13. Checkout & Indian Payment Gateway Modal (UPI, COD, Card) -->
+  <!-- 13. Authentication Gate Modal (Shown when unauthenticated user checks out) -->
+  <div class="modal-overlay" id="auth-gate-modal">
+    <div class="modal-content" style="max-width: 460px; padding: 28px 24px; text-align: center;">
+      <button class="modal-close-btn" onclick="closeAuthGateModal()">✕</button>
+      <div style="font-size: 2.8rem; margin-bottom: 8px;">🔐</div>
+      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Sign In to Complete Order</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+        Sign in to save your delivery address, track orders in real-time, and receive invoice receipts.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+        <button class="btn-checkout" onclick="closeAuthGateModal(); openAuthModal('login');">
+          Sign In to Your Account
+        </button>
+        <button class="btn-card-cart" style="padding: 12px;" onclick="closeAuthGateModal(); openAuthModal('register');">
+          New Customer? Create Account
+        </button>
+        <button class="filter-clear-btn" style="padding: 8px; font-size: 0.85rem;" onclick="continueAsGuestCheckout()">
+          Or Continue as Guest (Enter Details) ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. Checkout Modal (100% Clean Fields - No Personal Data) -->
   <div class="modal-overlay" id="checkout-modal">
     <div class="modal-content checkout-modal-content">
       <button class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
       
+      <!-- User status notice in checkout -->
+      <div id="checkout-user-banner" style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 8px 12px; margin-bottom: 16px; font-size: 0.82rem; display: flex; justify-content: space-between; align-items: center;">
+        <span id="checkout-user-status">Checking out as Guest</span>
+        <button class="filter-clear-btn" onclick="openAuthModal('login')">Sign In</button>
+      </div>
+
       <div class="checkout-step-title">
         <span>📍</span> Step 1: Delivery Address
       </div>
       <div class="form-grid">
         <div>
           <label class="form-label">Full Name *</label>
-          <input type="text" id="ship-name" class="form-input" value="Devajyoti Ghosh">
+          <input type="text" id="ship-name" class="form-input" placeholder="Enter your full name" required>
         </div>
         <div>
-          <label class="form-label">10-Digit Mobile *</label>
-          <input type="tel" id="ship-phone" class="form-input" value="+91 98325 71508">
+          <label class="form-label">Email Address (for Invoice & Updates) *</label>
+          <input type="email" id="ship-email" class="form-input" placeholder="name@example.com" required>
         </div>
-        <div class="form-group-full">
-          <label class="form-label">Street Address *</label>
-          <input type="text" id="ship-address" class="form-input" value="Ward 12, Bolpur Municipality">
+        <div>
+          <label class="form-label">10-Digit Mobile Phone *</label>
+          <input type="tel" id="ship-phone" class="form-input" placeholder="e.g. 9876543210" maxlength="10" required>
         </div>
         <div>
           <label class="form-label">City / Town *</label>
-          <input type="text" id="ship-city" class="form-input" value="Bolpur, Birbhum">
+          <input type="text" id="ship-city" class="form-input" placeholder="e.g. Mumbai, New Delhi" required>
+        </div>
+        <div class="form-group-full">
+          <label class="form-label">Street Address & Landmark *</label>
+          <input type="text" id="ship-address" class="form-input" placeholder="Flat / House No., Building Name, Street" required>
         </div>
         <div>
-          <label class="form-label">Pincode *</label>
-          <input type="text" id="ship-pincode" class="form-input" value="731204">
+          <label class="form-label">6-Digit Pincode *</label>
+          <input type="text" id="ship-pincode" class="form-input" placeholder="e.g. 400001" maxlength="6" required>
         </div>
       </div>
 
@@ -499,15 +533,15 @@
 
       <!-- Tab Panel: UPI -->
       <div class="payment-tab-panel active" id="panel-UPI">
-        <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">Select UPI App for Instant Verification:</p>
+        <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">Select Your UPI App:</p>
         <div class="upi-apps-row">
           <div class="upi-app-badge selected" onclick="selectUPIApp(this, 'Google Pay')">Google Pay</div>
           <div class="upi-app-badge" onclick="selectUPIApp(this, 'PhonePe')">PhonePe</div>
           <div class="upi-app-badge" onclick="selectUPIApp(this, 'Paytm')">Paytm</div>
-          <div class="upi-app-badge" onclick="selectUPIApp(this, 'BHIM')">BHIM</div>
+          <div class="upi-app-badge" onclick="selectUPIApp(this, 'BHIM')">BHIM UPI</div>
         </div>
-        <label class="form-label">Or Enter UPI ID</label>
-        <input type="text" id="upi-vpa-input" class="form-input" placeholder="e.g. 9832571508@axl or name@okhdfcbank" value="devajyoti@okhdfcbank">
+        <label class="form-label">Or Enter Virtual Payment Address (UPI ID)</label>
+        <input type="text" id="upi-vpa-input" class="form-input" placeholder="e.g. username@upi or mobile@upi">
         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">⚡ Extra 5% instant discount is automatically applied on UPI orders!</p>
       </div>
 
@@ -516,8 +550,8 @@
         <div style="display: flex; gap: 12px; align-items: center;">
           <span style="font-size: 2rem;">📦</span>
           <div>
-            <strong style="font-size: 0.95rem;">Pay via Cash or QR at Doorstep</strong>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Pay securely by cash or UPI QR code when our delivery courier arrives.</p>
+            <strong style="font-size: 0.95rem;">Pay Cash or QR at Doorstep</strong>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Pay securely by cash or UPI QR scan when your order arrives. No online payment required right now.</p>
           </div>
         </div>
       </div>
@@ -546,21 +580,126 @@
         <strong style="font-size: 1.25rem; color: var(--primary);" id="checkout-payable-total">₹0</strong>
       </div>
 
-      <button class="btn-checkout" onclick="executePlaceOrder()" id="btn-place-order">
-        Confirm & Place Order ➔
+      <button class="btn-checkout" onclick="startPaymentGatewayFlow()" id="btn-place-order">
+        Proceed to Payment ➔
       </button>
     </div>
   </div>
 
-  <!-- 14. Order Success & Tracking Modal -->
+  <!-- 15. Realistic Payment Gateway Simulator Modal (UPI / 3D-Secure OTP / COD) -->
+  <div class="modal-overlay" id="gateway-modal">
+    <div class="modal-content" style="max-width: 500px; padding: 26px 20px; text-align: center;">
+      <button class="modal-close-btn" onclick="closeGatewayModal()">✕</button>
+      
+      <!-- UPI Screen -->
+      <div id="gateway-upi-view">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+          <span style="font-size: 1.6rem;">⚡</span>
+          <h3 style="font-size: 1.25rem; font-weight: 800;">UPI Payment Gateway</h3>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          Collect request sent to <strong id="gateway-upi-target">Google Pay</strong>
+        </p>
+
+        <div class="upi-qr-box">
+          <div class="payment-timer" id="gateway-timer">04:59</div>
+          <div class="upi-qr-code">
+            <!-- Authentic Vector QR Mockup -->
+            <svg width="140" height="140" viewBox="0 0 100 100">
+              <rect width="100" height="100" fill="#FFF"/>
+              <!-- Position markers -->
+              <rect x="5" y="5" width="25" height="25" fill="#000"/>
+              <rect x="9" y="9" width="17" height="17" fill="#FFF"/>
+              <rect x="13" y="13" width="9" height="9" fill="#000"/>
+              <rect x="70" y="5" width="25" height="25" fill="#000"/>
+              <rect x="74" y="9" width="17" height="17" fill="#FFF"/>
+              <rect x="78" y="13" width="9" height="9" fill="#000"/>
+              <rect x="5" y="70" width="25" height="25" fill="#000"/>
+              <rect x="9" y="74" width="17" height="17" fill="#FFF"/>
+              <rect x="13" y="78" width="9" height="9" fill="#000"/>
+              <!-- QR Data Pattern Elements -->
+              <rect x="36" y="12" width="6" height="6" fill="#000"/>
+              <rect x="46" y="20" width="8" height="8" fill="#000"/>
+              <rect x="58" y="14" width="6" height="6" fill="#000"/>
+              <rect x="36" y="44" width="14" height="14" fill="#2874F0"/>
+              <rect x="56" y="44" width="10" height="10" fill="#000"/>
+              <rect x="72" y="40" width="8" height="8" fill="#000"/>
+              <rect x="15" y="40" width="12" height="6" fill="#000"/>
+              <rect x="38" y="70" width="8" height="12" fill="#000"/>
+              <rect x="52" y="76" width="14" height="8" fill="#000"/>
+              <rect x="74" y="70" width="18" height="18" fill="#000"/>
+            </svg>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Scan QR code with any UPI App or approve collect request</span>
+          <div style="font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-top: 6px;" id="gateway-upi-amount">₹0</div>
+        </div>
+
+        <div id="gateway-upi-status" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 16px;">
+          <span class="payment-processing-pulse"></span> Waiting for approval on your mobile...
+        </div>
+
+        <button class="btn-checkout" onclick="simulateUPIApproval()" id="btn-approve-upi">
+          ✓ Simulate Approval in UPI App
+        </button>
+      </div>
+
+      <!-- Card 3D-Secure OTP Screen -->
+      <div id="gateway-card-view" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px;">
+          <span style="font-size: 1.5rem;">🔒</span>
+          <h3 style="font-size: 1.2rem; font-weight: 800;">Bank 3D-Secure Verification</h3>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+          A One-Time Password (OTP) has been sent to your registered mobile ending in •••• 8291.
+        </p>
+
+        <div class="otp-screen">
+          <label style="font-size: 0.85rem; font-weight: 700; color: var(--text-main);">Enter 6-Digit Bank OTP:</label>
+          <div class="otp-inputs">
+            <input type="text" class="otp-digit" maxlength="1" value="7">
+            <input type="text" class="otp-digit" maxlength="1" value="4">
+            <input type="text" class="otp-digit" maxlength="1" value="9">
+            <input type="text" class="otp-digit" maxlength="1" value="2">
+            <input type="text" class="otp-digit" maxlength="1" value="8">
+            <input type="text" class="otp-digit" maxlength="1" value="1">
+          </div>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Resend OTP in <strong id="otp-timer">28s</strong></span>
+        </div>
+
+        <div id="gateway-card-status" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin: 14px 0;"></div>
+
+        <button class="btn-checkout" onclick="simulateCardAuthorization()" id="btn-submit-otp">
+          Submit OTP & Authorize Payment
+        </button>
+      </div>
+
+      <!-- COD Confirmation Screen -->
+      <div id="gateway-cod-view" style="display: none;">
+        <div style="font-size: 2.8rem; margin-bottom: 8px;">📦</div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 6px;">Confirm Cash on Delivery</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+          You will pay <strong id="gateway-cod-amount" style="color: var(--primary);">₹0</strong> in cash or UPI QR at your doorstep upon delivery.
+        </p>
+        <button class="btn-checkout" onclick="confirmCODOrder()" id="btn-confirm-cod">
+          Confirm Order (Payment on Delivery) ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. Order Success & Tracking Modal -->
   <div class="modal-overlay" id="order-success-modal">
     <div class="modal-content" style="max-width: 580px; text-align: center; padding: 40px 24px;">
       <button class="modal-close-btn" onclick="closeOrderSuccessModal()">✕</button>
       <div style="font-size: 3.2rem; margin-bottom: 10px;">🎉</div>
       <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Order Placed Successfully!</h2>
-      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px;">
-        Thank you for shopping at ZenithKart. Confirmation message sent to your phone.
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 14px;">
+        Thank you for shopping at ZenithKart. An email invoice receipt has been generated.
       </p>
+
+      <div style="background: #EBF4FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm); padding: 8px 12px; margin-bottom: 16px; font-size: 0.82rem; color: #1E40AF;">
+        📧 Invoice & confirmation sent to: <strong id="success-email-notice">your registered email</strong>
+      </div>
 
       <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 24px; text-align: left;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
@@ -572,13 +711,13 @@
           <strong id="success-delivery-date" style="font-size: 0.88rem;">Wednesday, 23 Sep 2026</strong>
         </div>
         <div style="display: flex; justify-content: space-between;">
-          <span style="font-size: 0.82rem; color: var(--text-muted);">Payment:</span>
-          <strong id="success-payment-method" style="font-size: 0.88rem;">UPI (Verified)</strong>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Order Status:</span>
+          <strong id="success-payment-method" style="font-size: 0.88rem;">Confirmed</strong>
         </div>
       </div>
 
       <!-- Tracking Stepper -->
-      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; padding: 0 4px;">
+      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 24px; padding: 0 4px;">
         <div style="text-align: center;">
           <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--success); color: #FFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; font-size: 0.72rem;">✓</div>
           <span style="font-size: 0.72rem; font-weight: 700;">Confirmed</span>
@@ -598,13 +737,13 @@
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-        <button class="btn-card-cart" onclick="closeOrderSuccessModal(); openOrdersModal();">Past Orders</button>
+        <button class="btn-card-cart" onclick="closeOrderSuccessModal(); openOrdersModal();">View My Orders</button>
         <button class="btn-card-buy" onclick="closeOrderSuccessModal()">Continue Shopping</button>
       </div>
     </div>
   </div>
 
-  <!-- 15. User Auth Modal -->
+  <!-- 17. User Auth Modal (Clean Generic Placeholders) -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-content" style="max-width: 440px; padding: 24px;">
       <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
@@ -618,7 +757,7 @@
       <form id="form-login" onsubmit="handleLoginSubmit(event)" style="margin-top: 20px;">
         <div style="margin-bottom: 14px;">
           <label class="form-label">Email Address</label>
-          <input type="email" id="login-email" class="form-input" placeholder="demo@zenithkart.com" required>
+          <input type="email" id="login-email" class="form-input" placeholder="Enter your email" required>
         </div>
         <div style="margin-bottom: 20px;">
           <label class="form-label">Password</label>
@@ -632,15 +771,15 @@
       <form id="form-register" onsubmit="handleRegisterSubmit(event)" style="margin-top: 20px; display: none;">
         <div style="margin-bottom: 12px;">
           <label class="form-label">Full Name</label>
-          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Devajyoti Ghosh" required>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Alex Kumar" required>
         </div>
         <div style="margin-bottom: 12px;">
           <label class="form-label">Email Address</label>
-          <input type="email" id="reg-email" class="form-input" placeholder="e.g. user@example.com" required>
+          <input type="email" id="reg-email" class="form-input" placeholder="e.g. alex@example.com" required>
         </div>
         <div style="margin-bottom: 12px;">
           <label class="form-label">Mobile Number</label>
-          <input type="tel" id="reg-phone" class="form-input" placeholder="+91 98765 43210">
+          <input type="tel" id="reg-phone" class="form-input" placeholder="10-digit mobile number" maxlength="10">
         </div>
         <div style="margin-bottom: 20px;">
           <label class="form-label">Password</label>
@@ -651,18 +790,21 @@
     </div>
   </div>
 
-  <!-- 16. My Orders Modal -->
+  <!-- 18. User Profile Drawer & My Orders Modal -->
   <div class="modal-overlay" id="orders-modal">
     <div class="modal-content" style="max-width: 720px; padding: 24px;">
       <button class="modal-close-btn" onclick="closeOrdersModal()">✕</button>
-      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 16px;">📦 My Orders & Tracking</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 800;">📦 My Orders & Tracking</h3>
+        <button class="filter-clear-btn" id="btn-logout" style="display: none;" onclick="logoutUser()">Log Out</button>
+      </div>
       <div id="user-orders-list">
         <!-- Rendered dynamically -->
       </div>
     </div>
   </div>
 
-  <!-- 17. AI Shopping Assistant Floating Bubble & Responsive Chat -->
+  <!-- 19. AI Shopping Assistant Floating Bubble & Responsive Chat -->
   <div class="ai-chat-bubble" onclick="toggleAIChat()" title="Chat with Zenith AI Assistant">
     ✨
   </div>
@@ -683,13 +825,13 @@
     <div style="padding: 10px 14px; background: #EEF2FF; border-bottom: 1px solid #E0E7FF; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap;">
       <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Laptops under 70k for coding')">💻 Laptops under 70k</span>
       <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Best 5G phones with offers')">📱 5G Smartphones</span>
-      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Show biggest discounts today')">🔥 50%+ Discounts</span>
+      <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Show biggest discounts today')">🔥 40%+ Discounts</span>
       <span class="filter-chip" style="cursor: pointer;" onclick="sendQuickPrompt('Gift ideas under 2000')">🎁 Gifts under 2k</span>
     </div>
 
     <div class="ai-chat-messages" id="ai-chat-messages">
       <div class="ai-msg bot">
-        👋 Hi! I'm your Zenith AI shopping assistant. Ask me anything like <em>"suggest gaming laptop under 80000"</em>, <em>"find boAt headphones"</em>, or track your orders!
+        👋 Hi! I'm your Zenith AI shopping assistant. Ask me anything like <em>"suggest iPhone 15 deals"</em>, <em>"find Nike running shoes"</em>, or track your orders!
       </div>
     </div>
 
@@ -699,10 +841,10 @@
     </div>
   </div>
 
-  <!-- 18. Toast Container -->
+  <!-- 20. Toast Container -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- 19. Site Footer -->
+  <!-- 21. Site Footer (Clean Branding - Zero Personal Info) -->
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-col">
@@ -718,7 +860,7 @@
         <ul>
           <li><a href="javascript:void(0)" onclick="openOrdersModal()">Track My Orders</a></li>
           <li><a href="javascript:void(0)">Shipping Rates</a></li>
-          <li><a href="javascript:void(0)">7-Day Returns</a></li>
+          <li><a href="javascript:void(0)">7-Day Returns & Replacement</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -731,17 +873,17 @@
       </div>
       <div class="footer-col">
         <h4>Secure Payments</h4>
-        <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">We accept all major payment networks:</p>
+        <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">We accept all major payment networks in India:</p>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; font-weight: 700; color: #FFF;">
-          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">⚡ UPI</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">⚡ UPI (GPay/PhonePe)</span>
           <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💵 Cash on Delivery</span>
-          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💳 RuPay / Visa</span>
+          <span style="background: #1E293B; padding: 4px 8px; border-radius: 4px;">💳 RuPay / Visa / Master</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 ZenithKart Inc. All rights reserved. Ultra-Smooth Mobile & Desktop E-Commerce.</div>
-      <div>Designed & Developed by <strong>Devajyoti Ghosh</strong></div>
+      <div>© 2026 ZenithKart Inc. All rights reserved. Ultra-Smooth E-Commerce Platform.</div>
+      <div>100% Genuine Branded Products with Official Manufacturer Warranty</div>
     </div>
   </footer>
 
